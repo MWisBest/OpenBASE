@@ -3,7 +3,9 @@
 *.com
 *.class
 *.dll
+*.dynlib
 *.exe
+*.jnilib
 *.o
 *.so
 
