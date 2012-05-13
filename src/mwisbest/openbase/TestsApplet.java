@@ -16,21 +16,7 @@
  */
 package mwisbest.openbase;
 
-import mwisbest.openbase.opengl.MainAppletGL;
-
-public class MainApplet extends MainAppletGL
+public class TestsApplet extends OpenBASEApplet
 {
-	/*public MainApplet theMainApplet;
 	
-	public MainApplet( int width, int height, boolean vSync )
-	{
-		super( width, height, vSync );
-		theMainApplet = this;
-	}
-	
-	public static void main( String[] argv )
-	{
-		MainAppletGL mainappletgl = new MainApplet( 640, 360, true );
-		mainappletgl.init();
-	}*/
 }

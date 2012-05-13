@@ -121,6 +121,7 @@ public abstract class OpenBASE
 	{
 		theThread = new Thread()
 		{
+			@Override
 			public void run()
 			{
 				running = true;

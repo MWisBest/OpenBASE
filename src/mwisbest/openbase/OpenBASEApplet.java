@@ -14,7 +14,7 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.opengl;
+package mwisbest.openbase;
 
 import java.applet.Applet;
 import java.awt.BorderLayout;
@@ -23,7 +23,7 @@ import java.awt.Canvas;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.opengl.Display;
 
-public abstract class MainAppletGL extends Applet
+public abstract class OpenBASEApplet extends Applet
 {
 	private int canvasWidth = 640;
 	private int canvasHeight = 360;
@@ -39,31 +39,31 @@ public abstract class MainAppletGL extends Applet
 	private Thread theThread = null;
 	private boolean running = false;
 	
-	public MainAppletGL()
+	public OpenBASEApplet()
 	{
 	}
 	
-	public MainAppletGL( int width, int height )
+	public OpenBASEApplet( int width, int height )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
 	}
 	
-	public MainAppletGL( int width, int height, boolean vSync )
+	public OpenBASEApplet( int width, int height, boolean vSync )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
 		this.canvasVSync = vSync;
 	}
 	
-	public MainAppletGL( int width, int height, String title )
+	public OpenBASEApplet( int width, int height, String title )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
 		this.canvasTitle = title;
 	}
 	
-	public MainAppletGL( int width, int height, String title, boolean vSync  )
+	public OpenBASEApplet( int width, int height, String title, boolean vSync  )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
@@ -71,7 +71,7 @@ public abstract class MainAppletGL extends Applet
 		this.canvasVSync = vSync;
 	}
 	
-	public MainAppletGL( int width, int height, String icon16loc, String icon32loc )
+	public OpenBASEApplet( int width, int height, String icon16loc, String icon32loc )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
@@ -79,7 +79,7 @@ public abstract class MainAppletGL extends Applet
 		this.canvasIcon32Loc = icon32loc;
 	}
 	
-	public MainAppletGL( int width, int height, String icon16loc, String icon32loc, boolean vSync )
+	public OpenBASEApplet( int width, int height, String icon16loc, String icon32loc, boolean vSync )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
@@ -88,7 +88,7 @@ public abstract class MainAppletGL extends Applet
 		this.canvasVSync = vSync;
 	}
 	
-	public MainAppletGL( int width, int height, String title, String icon16loc, String icon32loc )
+	public OpenBASEApplet( int width, int height, String title, String icon16loc, String icon32loc )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
@@ -97,7 +97,7 @@ public abstract class MainAppletGL extends Applet
 		this.canvasIcon32Loc = icon32loc;
 	}
 	
-	public MainAppletGL( int width, int height, String title, String icon16loc, String icon32loc, boolean vSync )
+	public OpenBASEApplet( int width, int height, String title, String icon16loc, String icon32loc, boolean vSync )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
