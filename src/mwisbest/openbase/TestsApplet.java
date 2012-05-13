@@ -18,6 +18,13 @@ package mwisbest.openbase;
 
 public class TestsApplet extends OpenBASEApplet
 {
+	public static TestsApplet testsApplet;
+	
+	public TestsApplet()
+	{
+		super( 640, 360, false );
+	}
+	
 	@Override
 	public void loadResources()
 	{
