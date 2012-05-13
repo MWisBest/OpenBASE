@@ -21,26 +21,25 @@ public enum RenderPriority
 	/**
 	 * Will render before (behind) all other Widgets.
 	 */
-	HIGHEST(0),
+	HIGHEST( 0 ),
 	/**
 	 * Will render before (behind) most Widgets.
 	 */
-	HIGH(1),
+	HIGH( 1 ),
 	/**
 	 * Will render at the same time as most Widgets.
 	 * 
 	 * This is the default RenderPriority.
 	 */
-	NORMAL(2),
+	NORMAL( 2 ),
 	/**
 	 * Will render after (in front of) most Widgets.
 	 */
-	LOW(3),
+	LOW( 3 ),
 	/**
 	 * Will render after (in front of) all other Widgets.
 	 */
-	LOWEST(4),
-	;
+	LOWEST( 4 ), ;
 	
 	private final int id;
 	

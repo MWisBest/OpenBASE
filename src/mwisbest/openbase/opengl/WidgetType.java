@@ -18,8 +18,5 @@ package mwisbest.openbase.opengl;
 
 public enum WidgetType
 {
-	BUTTON,
-	TEXT,
-	TEXTURE,
-	WIDGET,
+	BUTTON, TEXT, TEXTURE, WIDGET,
 }

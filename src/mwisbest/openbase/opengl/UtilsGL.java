@@ -123,7 +123,7 @@ public class UtilsGL
 			e.printStackTrace();
 		}
 		return null;
-	}	
+	}
 	
 	/**
 	 * Draws the specified texture to positions x and y on the screen and scaled with the specified width and height
@@ -206,7 +206,7 @@ public class UtilsGL
 			TrueTypeFont font = new TrueTypeFont( awtFont, antiAlias );
 			return font;
 		}
-		catch( Exception e)
+		catch( Exception e )
 		{
 			e.printStackTrace();
 		}

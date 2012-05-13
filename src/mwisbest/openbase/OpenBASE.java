@@ -36,8 +36,7 @@ public abstract class OpenBASE
 {
 	private Thread theThread = null;
 	private int windowWidth = 640, windowHeight = 360;
-	private String windowTitle = "OpenBASE", windowIcon16Loc = "/GLicon16.png",
-			windowIcon32Loc = "/GLicon32.png";
+	private String windowTitle = "OpenBASE", windowIcon16Loc = "/GLicon16.png", windowIcon32Loc = "/GLicon32.png";
 	private boolean windowVSync = false, running = false;
 	
 	public OpenBASE()
@@ -120,14 +119,14 @@ public abstract class OpenBASE
 	public void start()
 	{
 		theThread = new Thread()
-		{
-			@Override
-			public void run()
 			{
-				running = true;
-				init();
-			}
-		};
+				@Override
+				public void run()
+				{
+					running = true;
+					init();
+				}
+			};
 		theThread.start();
 	}
 	

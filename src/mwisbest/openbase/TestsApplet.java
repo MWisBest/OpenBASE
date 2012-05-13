@@ -22,12 +22,12 @@ public class TestsApplet extends OpenBASEApplet
 	public void loadResources()
 	{
 	}
-
+	
 	@Override
 	public void customRender()
 	{
 	}
-
+	
 	@Override
 	public void customAudio()
 	{
