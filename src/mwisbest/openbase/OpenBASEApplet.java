@@ -63,7 +63,7 @@ public abstract class OpenBASEApplet extends Applet
 		this.canvasTitle = title;
 	}
 	
-	public OpenBASEApplet( int width, int height, String title, boolean vSync  )
+	public OpenBASEApplet( int width, int height, String title, boolean vSync )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
@@ -164,11 +164,23 @@ public abstract class OpenBASEApplet extends Applet
 	{
 		while( running )
 		{
-			Display.sync( 60 );
-			Display.update();
+			render();
+			audio();
 		}
 		
 		Display.destroy();
+	}
+	
+	public void audio()
+	{
+		customAudio();
+	}
+	
+	public void render()
+	{
+		Display.sync( 60 );
+		customRender();
+		Display.update();
 	}
 	
 	@Override
@@ -206,4 +218,10 @@ public abstract class OpenBASEApplet extends Applet
 			throw new RuntimeException( "Unable to create the display!" );
 		}
 	}
+	
+	public abstract void loadResources();
+	
+	public abstract void customRender();
+	
+	public abstract void customAudio();
 }

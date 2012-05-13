@@ -18,5 +18,18 @@ package mwisbest.openbase;
 
 public class TestsApplet extends OpenBASEApplet
 {
-	
+	@Override
+	public void loadResources()
+	{
+	}
+
+	@Override
+	public void customRender()
+	{
+	}
+
+	@Override
+	public void customAudio()
+	{
+	}
 }
