@@ -23,7 +23,6 @@ import mwisbest.openbase.ResourceManager;
 import mwisbest.openbase.opengl.UtilsGL;
 import mwisbest.openbase.opengl.Widget;
 
-// TODO: Don't include this in releases I would assume?
 public class Application extends OpenBASE
 {
 	public static Application tests;
