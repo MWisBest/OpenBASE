@@ -16,19 +16,13 @@
  */
 package mwisbest.openbase.test;
 
-import org.newdawn.slick.opengl.TextureImpl;
+import mwisbest.openbase.OpenBASEApplet;
 
-import mwisbest.openbase.OpenBASE;
-import mwisbest.openbase.ResourceManager;
-import mwisbest.openbase.opengl.UtilsGL;
-import mwisbest.openbase.opengl.Widget;
-
-// TODO: Don't include this in releases I would assume?
-public class Tests extends OpenBASE
+public class Applet extends OpenBASEApplet
 {
-	public static Tests tests;
+	public static Applet testsApplet;
 	
-	public Tests()
+	public Applet()
 	{
 		super( 640, 360, false );
 	}
@@ -36,30 +30,15 @@ public class Tests extends OpenBASE
 	@Override
 	public void loadResources()
 	{
-		ResourceManager.addWidget( "test", new Widget( UtilsGL.loadTexture( "GLicon256.png" ) ) );
-		ResourceManager.addFont( "BNE12", UtilsGL.loadFont( "BraveNewEra.ttf", 12.0F, true ) );
-		ResourceManager.addFont( "BNE24", UtilsGL.loadFont( "BraveNewEra.ttf", 24.0F, true ) );
 	}
 	
 	@Override
 	public void customRender()
 	{
-		TextureImpl.bindNone();
-		ResourceManager.getFont( "BNE24" ).drawString( 400, 300, "Hello!" );
 	}
 	
 	@Override
 	public void customAudio()
 	{
-	}
-	
-	@Override
-	public void customInput()
-	{
-	}
-	
-	public static void main( String[] argv )
-	{
-		tests = new Tests();
 	}
 }
