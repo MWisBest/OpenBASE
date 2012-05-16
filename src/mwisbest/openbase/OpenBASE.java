@@ -162,10 +162,7 @@ public abstract class OpenBASE
 		{
 			for( Entry<String, Widget> widget : theWidgets.entrySet() )
 			{
-				if( widget.getValue().getRenderPriority() == priority && widget.getValue().getVisible() )
-				{
-					widget.getValue().render();
-				}
+				if( widget.getValue().getRenderPriority() == priority && widget.getValue().getVisible() ) widget.getValue().render();
 			}
 		}
 		
