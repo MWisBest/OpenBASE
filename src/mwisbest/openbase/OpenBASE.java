@@ -43,77 +43,51 @@ public abstract class OpenBASE
 	
 	public OpenBASE()
 	{
-		this.start();
+		this( 640, 360, "OpenBASE", "GLicon16.png", "GLicon32.png", false );
 	}
 	
 	public OpenBASE( int width, int height )
 	{
-		this.windowWidth = width;
-		this.windowHeight = height;
-		this.start();
+		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", false );
 	}
 	
 	public OpenBASE( int width, int height, boolean vSync )
 	{
-		this.windowWidth = width;
-		this.windowHeight = height;
-		this.windowVSync = vSync;
-		this.start();
+		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", vSync );
 	}
 	
 	public OpenBASE( int width, int height, String title )
 	{
-		this.windowWidth = width;
-		this.windowHeight = height;
-		this.windowTitle = title;
-		this.start();
+		this( width, height, title, "GLicon16.png", "GLicon32.png", false );
 	}
 	
 	public OpenBASE( int width, int height, String title, boolean vSync )
 	{
-		this.windowWidth = width;
-		this.windowHeight = height;
-		this.windowTitle = title;
-		this.windowVSync = vSync;
-		this.start();
+		this( width, height, title, "GLicon16.png", "GLicon32.png", vSync );
 	}
 	
-	public OpenBASE( int width, int height, String icon16loc, String icon32loc )
+	public OpenBASE( int width, int height, String icon16Loc, String icon32Loc )
 	{
-		this.windowWidth = width;
-		this.windowHeight = height;
-		this.windowIcon16Loc = icon16loc;
-		this.windowIcon32Loc = icon32loc;
-		this.start();
+		this( width, height, "OpenBASE", icon16Loc, icon32Loc, false );
 	}
 	
-	public OpenBASE( int width, int height, String icon16loc, String icon32loc, boolean vSync )
+	public OpenBASE( int width, int height, String icon16Loc, String icon32Loc, boolean vSync )
 	{
-		this.windowWidth = width;
-		this.windowHeight = height;
-		this.windowIcon16Loc = icon16loc;
-		this.windowIcon32Loc = icon32loc;
-		this.windowVSync = vSync;
-		this.start();
+		this( width, height, "OpenBASE", icon16Loc, icon32Loc, vSync );
 	}
 	
-	public OpenBASE( int width, int height, String title, String icon16loc, String icon32loc )
+	public OpenBASE( int width, int height, String title, String icon16Loc, String icon32Loc )
+	{
+		this( width, height, title, icon16Loc, icon32Loc, false );
+	}
+	
+	public OpenBASE( int width, int height, String title, String icon16Loc, String icon32Loc, boolean vSync )
 	{
 		this.windowWidth = width;
 		this.windowHeight = height;
 		this.windowTitle = title;
-		this.windowIcon16Loc = icon16loc;
-		this.windowIcon32Loc = icon32loc;
-		this.start();
-	}
-	
-	public OpenBASE( int width, int height, String title, String icon16loc, String icon32loc, boolean vSync )
-	{
-		this.windowWidth = width;
-		this.windowHeight = height;
-		this.windowTitle = title;
-		this.windowIcon16Loc = icon16loc;
-		this.windowIcon32Loc = icon32loc;
+		this.windowIcon16Loc = icon16Loc;
+		this.windowIcon32Loc = icon32Loc;
 		this.windowVSync = vSync;
 		this.start();
 	}

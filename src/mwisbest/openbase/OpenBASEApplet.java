@@ -41,69 +41,51 @@ public abstract class OpenBASEApplet extends Applet
 	
 	public OpenBASEApplet()
 	{
+		this( 640, 360, "OpenBASE", "GLicon16.png", "GLicon32.png", false );
 	}
 	
 	public OpenBASEApplet( int width, int height )
 	{
-		this.canvasWidth = width;
-		this.canvasHeight = height;
+		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", false );
 	}
 	
 	public OpenBASEApplet( int width, int height, boolean vSync )
 	{
-		this.canvasWidth = width;
-		this.canvasHeight = height;
-		this.canvasVSync = vSync;
+		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", vSync );
 	}
 	
 	public OpenBASEApplet( int width, int height, String title )
 	{
-		this.canvasWidth = width;
-		this.canvasHeight = height;
-		this.canvasTitle = title;
+		this( width, height, title, "GLicon16.png", "GLicon32.png", false );
 	}
 	
 	public OpenBASEApplet( int width, int height, String title, boolean vSync )
 	{
-		this.canvasWidth = width;
-		this.canvasHeight = height;
-		this.canvasTitle = title;
-		this.canvasVSync = vSync;
+		this( width, height, title, "GLicon16.png", "GLicon32.png", vSync );
 	}
 	
-	public OpenBASEApplet( int width, int height, String icon16loc, String icon32loc )
+	public OpenBASEApplet( int width, int height, String icon16Loc, String icon32Loc )
 	{
-		this.canvasWidth = width;
-		this.canvasHeight = height;
-		this.canvasIcon16Loc = icon16loc;
-		this.canvasIcon32Loc = icon32loc;
+		this( width, height, "OpenBASE", icon16Loc, icon32Loc, false );
 	}
 	
-	public OpenBASEApplet( int width, int height, String icon16loc, String icon32loc, boolean vSync )
+	public OpenBASEApplet( int width, int height, String icon16Loc, String icon32Loc, boolean vSync )
 	{
-		this.canvasWidth = width;
-		this.canvasHeight = height;
-		this.canvasIcon16Loc = icon16loc;
-		this.canvasIcon32Loc = icon32loc;
-		this.canvasVSync = vSync;
+		this( width, height, "OpenBASE", icon16Loc, icon32Loc, vSync );
 	}
 	
-	public OpenBASEApplet( int width, int height, String title, String icon16loc, String icon32loc )
+	public OpenBASEApplet( int width, int height, String title, String icon16Loc, String icon32Loc )
+	{
+		this( width, height, title, icon16Loc, icon32Loc, false );
+	}
+	
+	public OpenBASEApplet( int width, int height, String title, String icon16Loc, String icon32Loc, boolean vSync )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
 		this.canvasTitle = title;
-		this.canvasIcon16Loc = icon16loc;
-		this.canvasIcon32Loc = icon32loc;
-	}
-	
-	public OpenBASEApplet( int width, int height, String title, String icon16loc, String icon32loc, boolean vSync )
-	{
-		this.canvasWidth = width;
-		this.canvasHeight = height;
-		this.canvasTitle = title;
-		this.canvasIcon16Loc = icon16loc;
-		this.canvasIcon32Loc = icon32loc;
+		this.canvasIcon16Loc = icon16Loc;
+		this.canvasIcon32Loc = icon32Loc;
 		this.canvasVSync = vSync;
 	}
 	
