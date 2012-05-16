@@ -14,10 +14,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase;
+package mwisbest.openbase.test;
 
 import org.newdawn.slick.opengl.TextureImpl;
 
+import mwisbest.openbase.OpenBASE;
+import mwisbest.openbase.ResourceManager;
 import mwisbest.openbase.opengl.UtilsGL;
 import mwisbest.openbase.opengl.Widget;
 
