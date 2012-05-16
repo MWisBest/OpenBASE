@@ -21,7 +21,6 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.net.URL;
 import java.nio.ByteBuffer;
 
 import javax.imageio.ImageIO;
@@ -45,9 +44,13 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class UtilsGL
 {
-	public static ByteBuffer loadIcon( URL url ) throws IOException
+	private UtilsGL()
 	{
-		InputStream is = url.openStream();
+	}
+	
+	public static ByteBuffer loadIcon( String path ) throws IOException
+	{
+		InputStream is = ResourceLoader.getResourceAsStream( path );
 		try
 		{
 			PNGDecoder decoder = new PNGDecoder( is );

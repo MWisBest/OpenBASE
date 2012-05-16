@@ -30,9 +30,9 @@ public abstract class OpenBASEApplet extends Applet
 	@SuppressWarnings( "unused" )
 	private String canvasTitle = "OpenBASE";
 	@SuppressWarnings( "unused" )
-	private String canvasIcon16Loc = "/GLicon16.png";
+	private String canvasIcon16Loc = "GLicon16.png";
 	@SuppressWarnings( "unused" )
-	private String canvasIcon32Loc = "/GLicon32.png";
+	private String canvasIcon32Loc = "GLicon32.png";
 	@SuppressWarnings( "unused" )
 	private boolean canvasVSync = false;
 	private Canvas displayParent = null;

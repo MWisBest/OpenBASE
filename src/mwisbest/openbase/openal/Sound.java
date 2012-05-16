@@ -14,28 +14,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.opengl;
+package mwisbest.openbase.openal;
 
-public enum WidgetType
+import org.newdawn.slick.openal.Audio;
+
+public class Sound
 {
-	/**
-	 * Buttons are clickable widgets that can do things when clicked.
-	 */
-	BUTTON,
-	/**
-	 * Default. Nothing special here.
-	 */
-	DEFAULT,
-	/**
-	 * Labels are strips of text.
-	 */
-	LABEL,
-	/**
-	 * Textures are plain images.
-	 */
-	TEXTURE,
-	/**
-	 * Unknown.
-	 */
-	UNKNOWN,
+	protected Audio sound = null;
+	
+	public Sound( Audio sound )
+	{
+		this.sound = sound;
+	}
 }

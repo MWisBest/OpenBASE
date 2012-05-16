@@ -51,6 +51,11 @@ public class Tests extends OpenBASE
 	{
 	}
 	
+	@Override
+	public void customInput()
+	{
+	}
+	
 	public static void main( String[] argv )
 	{
 		tests = new Tests();

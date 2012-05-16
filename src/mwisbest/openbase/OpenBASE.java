@@ -26,6 +26,8 @@ import mwisbest.openbase.opengl.UtilsGL;
 import mwisbest.openbase.opengl.Widget;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
@@ -36,7 +38,7 @@ public abstract class OpenBASE
 {
 	private Thread theThread = null;
 	private int windowWidth = 640, windowHeight = 360;
-	private String windowTitle = "OpenBASE", windowIcon16Loc = "/GLicon16.png", windowIcon32Loc = "/GLicon32.png";
+	private String windowTitle = "OpenBASE", windowIcon16Loc = "GLicon16.png", windowIcon32Loc = "GLicon32.png";
 	private boolean windowVSync = false, running = false;
 	
 	public OpenBASE()
@@ -136,7 +138,7 @@ public abstract class OpenBASE
 		{
 			Display.setDisplayMode( new DisplayMode( windowWidth, windowHeight ) );
 			Display.setTitle( windowTitle );
-			Display.setIcon( new ByteBuffer[] { UtilsGL.loadIcon( getClass().getResource( windowIcon16Loc ) ), UtilsGL.loadIcon( getClass().getResource( windowIcon32Loc ) ), } );
+			Display.setIcon( new ByteBuffer[] { UtilsGL.loadIcon( windowIcon16Loc ), UtilsGL.loadIcon( windowIcon32Loc ) } );
 			Display.setFullscreen( false );
 			Display.create();
 			Display.setVSyncEnabled( windowVSync );
@@ -168,6 +170,7 @@ public abstract class OpenBASE
 	{
 		while( this.running )
 		{
+			input();
 			render();
 			audio();
 		}
@@ -208,7 +211,20 @@ public abstract class OpenBASE
 		customAudio();
 	}
 	
+	public void input()
+	{
+		while( Mouse.next() )
+		{
+		}
+		while( Keyboard.next() )
+		{
+		}
+		customInput();
+	}
+	
 	public abstract void customRender();
 	
 	public abstract void customAudio();
+	
+	public abstract void customInput();
 }

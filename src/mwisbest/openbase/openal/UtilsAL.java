@@ -24,6 +24,10 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class UtilsAL
 {
+	private UtilsAL()
+	{
+	}
+	
 	public static Audio loadSound( String pathToSound )
 	{
 		return loadSound( pathToSound, "OGG" );

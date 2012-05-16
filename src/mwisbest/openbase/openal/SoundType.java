@@ -14,28 +14,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.opengl;
+package mwisbest.openbase.openal;
 
-public enum WidgetType
+public enum SoundType
 {
 	/**
-	 * Buttons are clickable widgets that can do things when clicked.
+	 * Effects play once and over other things.
 	 */
-	BUTTON,
+	EFFECT,
 	/**
-	 * Default. Nothing special here.
+	 * Songs play as long as you want and do not play over other songs.
 	 */
-	DEFAULT,
-	/**
-	 * Labels are strips of text.
-	 */
-	LABEL,
-	/**
-	 * Textures are plain images.
-	 */
-	TEXTURE,
-	/**
-	 * Unknown.
-	 */
-	UNKNOWN,
+	SONG,
 }
