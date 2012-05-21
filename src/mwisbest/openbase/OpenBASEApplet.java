@@ -19,9 +19,19 @@ package mwisbest.openbase;
 import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.util.HashMap;
+import java.util.Map.Entry;
+
+import mwisbest.openbase.opengl.RenderPriority;
+import mwisbest.openbase.opengl.Widget;
 
 import org.lwjgl.LWJGLException;
+import org.lwjgl.input.Keyboard;
+import org.lwjgl.input.Mouse;
+import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
+import org.newdawn.slick.openal.SoundStore;
 
 public abstract class OpenBASEApplet extends Applet
 {
@@ -101,11 +111,19 @@ public abstract class OpenBASEApplet extends Applet
 					{
 						Display.setParent( displayParent );
 						Display.create();
+						
+						GL11.glEnable( GL11.GL_TEXTURE_2D );
+						GL11.glDisable( GL11.GL_DEPTH_TEST );
+						GL11.glMatrixMode( GL11.GL_PROJECTION );
+						GL11.glLoadIdentity();
+						GL11.glOrtho( 0, canvasWidth, canvasHeight, 0, 1, -1 );
 					}
 					catch( LWJGLException e )
 					{
 						e.printStackTrace();
+						System.exit( 0 );
 					}
+					loadResources();
 					mainLoop();
 				}
 			};
@@ -146,23 +164,57 @@ public abstract class OpenBASEApplet extends Applet
 	{
 		while( running )
 		{
+			input();
 			render();
 			audio();
 		}
 		
 		Display.destroy();
-	}
-	
-	public void audio()
-	{
-		customAudio();
+		AL.destroy();
 	}
 	
 	public void render()
 	{
-		Display.sync( 60 );
+		GL11.glClear( GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT );
+		GL11.glMatrixMode( GL11.GL_MODELVIEW );
+		GL11.glLoadIdentity();
+		HashMap<String, Widget> theWidgets = ResourceManager.getWidgets();
+		RenderPriority[] rvalues = RenderPriority.values();
+		for( RenderPriority priority : rvalues )
+		{
+			for( Entry<String, Widget> widget : theWidgets.entrySet() )
+			{
+				if( widget.getValue().getRenderPriority() == priority && widget.getValue().getVisible() ) widget.getValue().render();
+			}
+		}
+		
+		//Display.sync( 60 );
 		customRender();
 		Display.update();
+		
+		if( Display.isCloseRequested() )
+		{
+			Display.destroy();
+			this.running = false;
+		}
+	}
+	
+	
+	public void audio()
+	{
+		SoundStore.get().poll( 0 );
+		customAudio();
+	}
+	
+	public void input()
+	{
+		while( Mouse.next() )
+		{
+		}
+		while( Keyboard.next() )
+		{
+		}
+		customInput();
 	}
 	
 	@Override
@@ -206,4 +258,6 @@ public abstract class OpenBASEApplet extends Applet
 	public abstract void customRender();
 	
 	public abstract void customAudio();
+	
+	public abstract void customInput();
 }

@@ -148,6 +148,7 @@ public abstract class OpenBASE
 			render();
 			audio();
 		}
+		Display.destroy();
 		AL.destroy();
 	}
 	
@@ -169,11 +170,7 @@ public abstract class OpenBASE
 		customRender();
 		
 		Display.update();
-		if( Display.isCloseRequested() )
-		{
-			Display.destroy();
-			this.running = false;
-		}
+		if( Display.isCloseRequested() ) this.running = false;
 	}
 	
 	public void audio()

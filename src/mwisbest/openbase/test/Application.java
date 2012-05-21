@@ -25,7 +25,7 @@ import mwisbest.openbase.opengl.Widget;
 
 public class Application extends OpenBASE
 {
-	public static Application tests;
+	public static Application application;
 	
 	public Application()
 	{
@@ -59,6 +59,6 @@ public class Application extends OpenBASE
 	
 	public static void main( String[] argv )
 	{
-		tests = new Application();
+		application = new Application();
 	}
 }

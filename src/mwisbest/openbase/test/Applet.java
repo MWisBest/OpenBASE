@@ -17,10 +17,13 @@
 package mwisbest.openbase.test;
 
 import mwisbest.openbase.OpenBASEApplet;
+import mwisbest.openbase.ResourceManager;
+import mwisbest.openbase.opengl.UtilsGL;
+import mwisbest.openbase.opengl.Widget;
 
 public class Applet extends OpenBASEApplet
 {
-	public static Applet testsApplet;
+	public static Applet applet;
 	
 	public Applet()
 	{
@@ -30,6 +33,9 @@ public class Applet extends OpenBASEApplet
 	@Override
 	public void loadResources()
 	{
+		ResourceManager.addWidget( "test", new Widget( UtilsGL.loadTexture( "GLicon256.png" ) ) );
+		ResourceManager.addFont( "BNE12", UtilsGL.loadFont( "BraveNewEra.ttf", 12.0F, true ) );
+		ResourceManager.addFont( "BNE24", UtilsGL.loadFont( "BraveNewEra.ttf", 24.0F, true ) );
 	}
 	
 	@Override
@@ -40,5 +46,15 @@ public class Applet extends OpenBASEApplet
 	@Override
 	public void customAudio()
 	{
+	}
+
+	@Override
+	public void customInput()
+	{
+	}
+	
+	public static void main( String[] argv ) // TODO: Get this working!
+	{
+		applet = new Applet();
 	}
 }
