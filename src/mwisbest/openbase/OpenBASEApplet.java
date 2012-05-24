@@ -160,63 +160,6 @@ public abstract class OpenBASEApplet extends Applet
 		super.destroy();
 	}
 	
-	public void mainLoop()
-	{
-		while( running )
-		{
-			input();
-			render();
-			audio();
-		}
-		
-		Display.destroy();
-		AL.destroy();
-	}
-	
-	public void render()
-	{
-		GL11.glClear( GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT );
-		GL11.glMatrixMode( GL11.GL_MODELVIEW );
-		GL11.glLoadIdentity();
-		HashMap<String, Widget> theWidgets = ResourceManager.getWidgets();
-		RenderPriority[] rvalues = RenderPriority.values();
-		for( RenderPriority priority : rvalues )
-		{
-			for( Entry<String, Widget> widget : theWidgets.entrySet() )
-			{
-				if( widget.getValue().getRenderPriority() == priority && widget.getValue().getVisible() ) widget.getValue().render();
-			}
-		}
-		
-		//Display.sync( 60 );
-		customRender();
-		Display.update();
-		
-		if( Display.isCloseRequested() )
-		{
-			Display.destroy();
-			this.running = false;
-		}
-	}
-	
-	
-	public void audio()
-	{
-		SoundStore.get().poll( 0 );
-		customAudio();
-	}
-	
-	public void input()
-	{
-		while( Mouse.next() )
-		{
-		}
-		while( Keyboard.next() )
-		{
-		}
-		customInput();
-	}
-	
 	@Override
 	public void init()
 	{
@@ -251,6 +194,57 @@ public abstract class OpenBASEApplet extends Applet
 			System.err.println( e );
 			throw new RuntimeException( "Unable to create the display!" );
 		}
+	}
+	
+	public void mainLoop()
+	{
+		while( running )
+		{
+			input();
+			render();
+			audio();
+		}
+		Display.destroy();
+		AL.destroy();
+	}
+	
+	public void render()
+	{
+		GL11.glClear( GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT );
+		GL11.glMatrixMode( GL11.GL_MODELVIEW );
+		GL11.glLoadIdentity();
+		HashMap<String, Widget> theWidgets = ResourceManager.getWidgets();
+		RenderPriority[] rvalues = RenderPriority.values();
+		for( RenderPriority priority : rvalues )
+		{
+			for( Entry<String, Widget> widget : theWidgets.entrySet() )
+			{
+				if( widget.getValue().getRenderPriority() == priority && widget.getValue().getVisible() ) widget.getValue().render();
+			}
+		}
+		
+		customRender();
+		
+		Display.update();
+		
+		if( Display.isCloseRequested() ) this.running = false;
+	}
+	
+	public void audio()
+	{
+		SoundStore.get().poll( 0 );
+		customAudio();
+	}
+	
+	public void input()
+	{
+		while( Mouse.next() )
+		{
+		}
+		while( Keyboard.next() )
+		{
+		}
+		customInput();
 	}
 	
 	public abstract void loadResources();

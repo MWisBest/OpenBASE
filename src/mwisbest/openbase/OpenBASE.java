@@ -138,8 +138,6 @@ public abstract class OpenBASE
 		mainLoop();
 	}
 	
-	public abstract void loadResources();
-	
 	public void mainLoop()
 	{
 		while( this.running )
@@ -189,6 +187,8 @@ public abstract class OpenBASE
 		}
 		customInput();
 	}
+	
+	public abstract void loadResources();
 	
 	public abstract void customRender();
 	
