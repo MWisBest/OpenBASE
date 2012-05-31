@@ -1,6 +1,6 @@
 /*
  * This file is part of OpenBASE.
- * 
+ *
  * Copyright © 2012, Kyle Repinski
  * OpenBASE is licensed under the GNU Lesser General Public License.
  *
