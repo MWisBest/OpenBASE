@@ -1,5 +1,8 @@
 /*
  * This file is part of OpenBASE.
+ * 
+ * Copyright © 2012, Kyle Repinski
+ * OpenBASE is licensed under the GNU Lesser General Public License.
  *
  * OpenBASE is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as published by
@@ -19,9 +22,13 @@ package mwisbest.openbase.opengl;
 public enum WidgetType
 {
 	/**
-	 * Buttons are clickable widgets that can do things when clicked.
+	 * Buttons are widgets that can do things when clicked.
 	 */
 	BUTTON,
+	/**
+	 * CheckBoxes are 
+	 */
+	CHECKBOX,
 	/**
 	 * Default. Nothing special here.
 	 */
@@ -30,6 +37,10 @@ public enum WidgetType
 	 * Labels are strips of text.
 	 */
 	LABEL,
+	/**
+	 * TextBoxes are places to type.
+	 */
+	TEXTBOX,
 	/**
 	 * Textures are plain images.
 	 */
