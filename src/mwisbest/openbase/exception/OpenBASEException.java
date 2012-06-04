@@ -22,7 +22,11 @@ package mwisbest.openbase.exception;
 public class OpenBASEException extends Exception
 {
 	private static final long serialVersionUID = 6103548155941293316L;
-
+	
+	public OpenBASEException()
+	{
+	}
+	
 	public OpenBASEException( String message )
 	{
 		super( message );

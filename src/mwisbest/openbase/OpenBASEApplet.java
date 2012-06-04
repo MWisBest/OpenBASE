@@ -173,7 +173,7 @@ public abstract class OpenBASEApplet extends Applet
 			displayParent = new Canvas()
 				{
 					private static final long serialVersionUID = 2601628115991718459L;
-
+					
 					@Override
 					public final void addNotify()
 					{

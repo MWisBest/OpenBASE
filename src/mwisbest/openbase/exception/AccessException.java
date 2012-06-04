@@ -22,7 +22,7 @@ package mwisbest.openbase.exception;
 public class AccessException extends RuntimeException
 {
 	private static final long serialVersionUID = 7291088741264708119L;
-
+	
 	public AccessException()
 	{
 		super();

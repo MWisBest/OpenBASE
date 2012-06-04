@@ -22,7 +22,7 @@ package mwisbest.openbase.exception;
 public class EventException extends Exception
 {
 	private static final long serialVersionUID = -2282936942228123571L;
-
+	
 	public EventException()
 	{
 		super();
