@@ -19,6 +19,7 @@
  */
 package mwisbest.openbase.opengl;
 
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -40,6 +41,8 @@ import org.lwjgl.opengl.GLContext;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
+import org.newdawn.slick.UnicodeFont;
+import org.newdawn.slick.font.effects.ColorEffect;
 import org.newdawn.slick.opengl.PNGDecoder;
 import org.newdawn.slick.opengl.Texture;
 import org.newdawn.slick.opengl.TextureLoader;
@@ -202,6 +205,7 @@ public class UtilsGL
 		return null;
 	}
 	
+	@Deprecated
 	public static TrueTypeFont loadFont( String pathToFont, float size, boolean antiAlias )
 	{
 		try
@@ -213,6 +217,39 @@ public class UtilsGL
 			return font;
 		}
 		catch( Exception e )
+		{
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public static UnicodeFont loadFont( String pathToFont, int size )
+	{
+		return loadFont( pathToFont, size, false, false, Color.white );
+	}
+	
+	public static UnicodeFont loadFont( String pathToFont, int size, boolean bold, boolean italic )
+	{
+		return loadFont( pathToFont, size, bold, italic, Color.white );
+	}
+	
+	public static UnicodeFont loadFont( String pathToFont, int size, Color color )
+	{
+		return loadFont( pathToFont, size, false, false, color );
+	}
+	
+	@SuppressWarnings( "unchecked" )
+	public static UnicodeFont loadFont( String pathToFont, int size, boolean bold, boolean italic, Color color )
+	{
+		try
+		{
+			UnicodeFont font = new UnicodeFont( pathToFont, size, bold, italic );
+			font.getEffects().add( new ColorEffect( color ) );
+			font.addAsciiGlyphs();
+			font.loadGlyphs();
+			return font;
+		}
+		catch( SlickException e )
 		{
 			e.printStackTrace();
 		}

@@ -232,7 +232,6 @@ public abstract class OpenBASEApplet extends Applet
 		customRender();
 		
 		Display.update();
-		
 		if( Display.isCloseRequested() ) this.running = false;
 	}
 	

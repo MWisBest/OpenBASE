@@ -38,8 +38,8 @@ public class Applet extends OpenBASEApplet
 	public void loadResources()
 	{
 		ResourceManager.addWidget( "test", new Widget( UtilsGL.loadTexture( "GLicon256.png" ) ) );
-		ResourceManager.addFont( "BNE12", UtilsGL.loadFont( "BraveNewEra.ttf", 12.0F, true ) );
-		ResourceManager.addFont( "BNE24", UtilsGL.loadFont( "BraveNewEra.ttf", 24.0F, true ) );
+		ResourceManager.addFont( "BNE12", UtilsGL.loadFont( "BraveNewEra.ttf", 12 ) );
+		ResourceManager.addFont( "BNE24", UtilsGL.loadFont( "BraveNewEra.ttf", 24 ) );
 	}
 	
 	@Override
