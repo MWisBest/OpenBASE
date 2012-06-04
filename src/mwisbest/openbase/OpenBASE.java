@@ -21,7 +21,7 @@ package mwisbest.openbase;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import mwisbest.openbase.opengl.RenderPriority;
@@ -158,7 +158,7 @@ public abstract class OpenBASE
 		GL11.glClear( GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT );
 		GL11.glMatrixMode( GL11.GL_MODELVIEW );
 		GL11.glLoadIdentity();
-		HashMap<String, Widget> theWidgets = ResourceManager.getWidgets();
+		Map<String, Widget> theWidgets = ResourceManager.getWidgets();
 		RenderPriority[] rvalues = RenderPriority.values();
 		for( RenderPriority priority : rvalues )
 		{

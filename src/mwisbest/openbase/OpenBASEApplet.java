@@ -22,7 +22,7 @@ package mwisbest.openbase;
 import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
-import java.util.HashMap;
+import java.util.Map;
 import java.util.Map.Entry;
 
 import mwisbest.openbase.opengl.RenderPriority;
@@ -38,6 +38,7 @@ import org.newdawn.slick.openal.SoundStore;
 
 public abstract class OpenBASEApplet extends Applet
 {
+	private static final long serialVersionUID = -3837899243800598866L;
 	private int canvasWidth = 640;
 	private int canvasHeight = 360;
 	@SuppressWarnings( "unused" )
@@ -171,6 +172,8 @@ public abstract class OpenBASEApplet extends Applet
 		{
 			displayParent = new Canvas()
 				{
+					private static final long serialVersionUID = 2601628115991718459L;
+
 					@Override
 					public final void addNotify()
 					{
@@ -216,7 +219,7 @@ public abstract class OpenBASEApplet extends Applet
 		GL11.glClear( GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT );
 		GL11.glMatrixMode( GL11.GL_MODELVIEW );
 		GL11.glLoadIdentity();
-		HashMap<String, Widget> theWidgets = ResourceManager.getWidgets();
+		Map<String, Widget> theWidgets = ResourceManager.getWidgets();
 		RenderPriority[] rvalues = RenderPriority.values();
 		for( RenderPriority priority : rvalues )
 		{

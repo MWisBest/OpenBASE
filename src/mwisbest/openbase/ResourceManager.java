@@ -20,6 +20,7 @@
 package mwisbest.openbase;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import mwisbest.openbase.opengl.Widget;
 
@@ -30,12 +31,12 @@ import org.newdawn.slick.opengl.Texture;
 
 public class ResourceManager
 {
-	private static final HashMap<String, Font> fonts = new HashMap<String, Font>();
-	private static final HashMap<String, String> parameters = new HashMap<String, String>();
-	private static final HashMap<String, Music> musics = new HashMap<String, Music>();
-	private static final HashMap<String, Sound> sounds = new HashMap<String, Sound>();
-	private static final HashMap<String, Texture> textures = new HashMap<String, Texture>();
-	private static final HashMap<String, Widget> widgets = new HashMap<String, Widget>();
+	private static final Map<String, Font> fonts = new HashMap<String, Font>();
+	private static final Map<String, String> parameters = new HashMap<String, String>();
+	private static final Map<String, Music> musics = new HashMap<String, Music>();
+	private static final Map<String, Sound> sounds = new HashMap<String, Sound>();
+	private static final Map<String, Texture> textures = new HashMap<String, Texture>();
+	private static final Map<String, Widget> widgets = new HashMap<String, Widget>();
 	
 	private ResourceManager()
 	{
@@ -77,32 +78,32 @@ public class ResourceManager
 		widgets.put( key, widget );
 	}
 	
-	public static HashMap<String, Font> getFonts()
+	public static Map<String, Font> getFonts()
 	{
 		return fonts;
 	}
 	
-	public static HashMap<String, Music> getMusics()
+	public static Map<String, Music> getMusics()
 	{
 		return musics;
 	}
 	
-	public static HashMap<String, String> getParameters()
+	public static Map<String, String> getParameters()
 	{
 		return parameters;
 	}
 	
-	public static HashMap<String, Sound> getSounds()
+	public static Map<String, Sound> getSounds()
 	{
 		return sounds;
 	}
 	
-	public static HashMap<String, Texture> getTextures()
+	public static Map<String, Texture> getTextures()
 	{
 		return textures;
 	}
 	
-	public static HashMap<String, Widget> getWidgets()
+	public static Map<String, Widget> getWidgets()
 	{
 		return widgets;
 	}

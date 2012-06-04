@@ -17,9 +17,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.event;
+package mwisbest.openbase.util;
 
-public class Handler
+import java.util.logging.Logger;
+
+public class Logging
 {
+	public static final Logger logger = Logger.getLogger( "OpenBASE" );
 	
+	public static Logger getLogger()
+	{
+		return logger;
+	}
 }

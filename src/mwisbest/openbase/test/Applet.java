@@ -26,6 +26,7 @@ import mwisbest.openbase.opengl.Widget;
 
 public class Applet extends OpenBASEApplet
 {
+	private static final long serialVersionUID = 2189135685442424091L;
 	public static Applet applet;
 	
 	public Applet()
