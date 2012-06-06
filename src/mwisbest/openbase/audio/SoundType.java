@@ -17,29 +17,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.exception;
+package mwisbest.openbase.audio;
 
-public class OpenBASEException extends Exception
+public enum SoundType
 {
-	private static final long serialVersionUID = 6103548155941293316L;
-	
-	public OpenBASEException()
-	{
-		super();
-	}
-	
-	public OpenBASEException( String message )
-	{
-		super( message );
-	}
-	
-	public OpenBASEException( String message, Throwable cause )
-	{
-		super( message, cause );
-	}
-	
-	public OpenBASEException( Throwable cause )
-	{
-		super( cause );
-	}
+	/**
+	 * Effects play once and over other things.
+	 */
+	EFFECT,
+	/**
+	 * Songs play as long as you want and do not play over other songs.
+	 */
+	SONG;
 }

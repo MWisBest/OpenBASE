@@ -17,50 +17,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.event.input;
+package mwisbest.openbase.input;
 
-import mwisbest.openbase.event.Event;
-import mwisbest.openbase.event.HandlerList;
-import mwisbest.openbase.input.KeyboardKey;
-import mwisbest.openbase.input.KeyboardKeyState;
-
-public class KeyboardEvent extends Event
+public enum MouseButtonState
 {
-	private static HandlerList handlers = new HandlerList();
-	private KeyboardKey key;
-	private KeyboardKeyState state;
-	private boolean repeatEvent;
+	PRESSED( true ),
+	RELEASED( false );
 	
-	public KeyboardEvent( KeyboardKey key, KeyboardKeyState state, boolean repeatEvent )
+	private final boolean state;
+	
+	private MouseButtonState( final boolean state )
 	{
-		this.key = key;
 		this.state = state;
-		this.repeatEvent = repeatEvent;
 	}
 	
-	public KeyboardKey getKey()
-	{
-		return key;
-	}
-	
-	public KeyboardKeyState getState()
+	public boolean getState()
 	{
 		return state;
 	}
 	
-	public boolean getRepeatEvent()
+	public static MouseButtonState getButtonState( boolean state )
 	{
-		return repeatEvent;
-	}
-	
-	@Override
-	public HandlerList getHandlers()
-	{
-		return handlers;
-	}
-	
-	public static HandlerList getHandlerList()
-	{
-		return handlers;
+		if( state ) return PRESSED;
+		else if( !state ) return RELEASED;
+		return null;
 	}
 }

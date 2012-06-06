@@ -17,29 +17,33 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.exception;
+package mwisbest.openbase.event;
 
-public class OpenBASEException extends Exception
+public class ListenerRegistration
 {
-	private static final long serialVersionUID = 6103548155941293316L;
+	private final EventExecutor executor;
+	private final EventPriority priority;
+	private final Object owner;
 	
-	public OpenBASEException()
+	public ListenerRegistration( final EventExecutor executor, final EventPriority priority, final Object owner )
 	{
-		super();
+		this.executor = executor;
+		this.priority = priority;
+		this.owner = owner;
 	}
 	
-	public OpenBASEException( String message )
+	public EventExecutor getExecutor()
 	{
-		super( message );
+		return executor;
 	}
 	
-	public OpenBASEException( String message, Throwable cause )
+	public EventPriority getPriority()
 	{
-		super( message, cause );
+		return priority;
 	}
 	
-	public OpenBASEException( Throwable cause )
+	public Object getOwner()
 	{
-		super( cause );
+		return owner;
 	}
 }

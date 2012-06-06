@@ -17,16 +17,36 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.openal;
+package mwisbest.openbase.gui;
 
-public enum SoundType
+public enum WidgetType
 {
 	/**
-	 * Effects play once and over other things.
+	 * Buttons are widgets that can do things when clicked.
 	 */
-	EFFECT,
+	BUTTON,
 	/**
-	 * Songs play as long as you want and do not play over other songs.
+	 * CheckBoxes are 
 	 */
-	SONG,
+	CHECKBOX,
+	/**
+	 * Default. Nothing special here.
+	 */
+	DEFAULT,
+	/**
+	 * Labels are strips of text.
+	 */
+	LABEL,
+	/**
+	 * TextBoxes are places to type.
+	 */
+	TEXTBOX,
+	/**
+	 * Textures are plain images.
+	 */
+	TEXTURE,
+	/**
+	 * Unknown.
+	 */
+	UNKNOWN;
 }

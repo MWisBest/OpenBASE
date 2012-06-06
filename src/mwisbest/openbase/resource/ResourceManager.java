@@ -17,12 +17,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase;
+package mwisbest.openbase.resource;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import mwisbest.openbase.opengl.Widget;
+import mwisbest.openbase.gui.Widget;
 
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Music;
@@ -37,10 +37,6 @@ public class ResourceManager
 	private static final Map<String, Sound> sounds = new HashMap<String, Sound>();
 	private static final Map<String, Texture> textures = new HashMap<String, Texture>();
 	private static final Map<String, Widget> widgets = new HashMap<String, Widget>();
-	
-	private ResourceManager()
-	{
-	}
 	
 	public static void addFont( String key, Font font )
 	{
@@ -193,5 +189,83 @@ public class ResourceManager
 	public static boolean hasWidget( String key )
 	{
 		return widgets.containsKey( key );
+	}
+	
+	public static void removeFont( String key )
+	{
+		if( !hasFont( key ) ) throw new IllegalArgumentException( "Font doesn't exist for key: " + key );
+		fonts.remove( key );
+	}
+	
+	public static void removeMusic( String key )
+	{
+		if( !hasMusic( key ) ) throw new IllegalArgumentException( "Music doesn't exist for key: " + key );
+		musics.remove( key );
+	}
+	
+	public static void removeParameter( String key )
+	{
+		if( !hasParameter( key ) ) throw new IllegalArgumentException( "Parameter doesn't exist for key: " + key );
+		parameters.remove( key );
+	}
+	
+	public static void removeSound( String key )
+	{
+		if( !hasSound( key ) ) throw new IllegalArgumentException( "Sound doesn't exist for key: " + key );
+		sounds.remove( key );
+	}
+	
+	public static void removeTexture( String key )
+	{
+		if( !hasTexture( key ) ) throw new IllegalArgumentException( "Texture doesn't exist for key: " + key );
+		textures.remove( key );
+	}
+	
+	public static void removeWidget( String key )
+	{
+		if( !hasWidget( key ) ) throw new IllegalArgumentException( "Widget doesn't exist for key: " + key );
+		widgets.remove( key );
+	}
+	
+	public static void replaceFont( String key, Font font )
+	{
+		if( !hasFont( key ) ) throw new IllegalArgumentException( "Font doesn't exist for key: " + key );
+		fonts.remove( key );
+		fonts.put( key, font );
+	}
+	
+	public static void replaceMusic( String key, Music music )
+	{
+		if( !hasMusic( key ) ) throw new IllegalArgumentException( "Music doesn't exist for key: " + key );
+		musics.remove( key );
+		musics.put( key, music );
+	}
+	
+	public static void replaceParameter( String key, String value )
+	{
+		if( !hasParameter( key ) ) throw new IllegalArgumentException( "Parameter doesn't exist for key: " + key );
+		parameters.remove( key );
+		parameters.put( key, value );
+	}
+	
+	public static void replaceSound( String key, Sound sound )
+	{
+		if( !hasSound( key ) ) throw new IllegalArgumentException( "Sound doesn't exist for key: " + key );
+		sounds.remove( key );
+		sounds.put( key, sound );
+	}
+	
+	public static void replaceTexture( String key, Texture texture )
+	{
+		if( !hasTexture( key ) ) throw new IllegalArgumentException( "Texture doesn't exist for key: " + key );
+		textures.remove( key );
+		textures.put( key, texture );
+	}
+	
+	public static void replaceWidget( String key, Widget widget )
+	{
+		if( !hasWidget( key ) ) throw new IllegalArgumentException( "Widget doesn't exist for key: " + key );
+		widgets.remove( key );
+		widgets.put( key, widget );
 	}
 }

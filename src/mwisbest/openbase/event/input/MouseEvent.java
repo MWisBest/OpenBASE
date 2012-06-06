@@ -19,7 +19,60 @@
  */
 package mwisbest.openbase.event.input;
 
-public class MouseEvent
+import mwisbest.openbase.event.Event;
+import mwisbest.openbase.event.HandlerList;
+import mwisbest.openbase.input.MouseButton;
+import mwisbest.openbase.input.MouseButtonState;
+
+public class MouseEvent extends Event
 {
+	private static HandlerList handlers = new HandlerList();
+	private MouseButton button;
+	private MouseButtonState state;
+	private int x, y, z;
 	
+	public MouseEvent( MouseButton button, MouseButtonState state, int x, int y, int z )
+	{
+		this.button = button;
+		this.state = state;
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+	
+	public MouseButton getButton()
+	{
+		return button;
+	}
+	
+	public MouseButtonState getState()
+	{
+		return state;
+	}
+	
+	public int getX()
+	{
+		return x;
+	}
+	
+	public int getY()
+	{
+		return y;
+	}
+	
+	public int getZ()
+	{
+		return z;
+	}
+	
+	@Override
+	public HandlerList getHandlers()
+	{
+		return handlers;
+	}
+	
+	public static HandlerList getHandlerList()
+	{
+		return handlers;
+	}
 }

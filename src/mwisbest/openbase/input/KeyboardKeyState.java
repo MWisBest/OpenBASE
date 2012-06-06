@@ -17,36 +17,29 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.opengl;
+package mwisbest.openbase.input;
 
-public enum WidgetType
+public enum KeyboardKeyState
 {
-	/**
-	 * Buttons are widgets that can do things when clicked.
-	 */
-	BUTTON,
-	/**
-	 * CheckBoxes are 
-	 */
-	CHECKBOX,
-	/**
-	 * Default. Nothing special here.
-	 */
-	DEFAULT,
-	/**
-	 * Labels are strips of text.
-	 */
-	LABEL,
-	/**
-	 * TextBoxes are places to type.
-	 */
-	TEXTBOX,
-	/**
-	 * Textures are plain images.
-	 */
-	TEXTURE,
-	/**
-	 * Unknown.
-	 */
-	UNKNOWN,
+	PRESSED( true ),
+	RELEASED( false );
+	
+	private final boolean state;
+	
+	private KeyboardKeyState( final boolean state )
+	{
+		this.state = state;
+	}
+	
+	public boolean getState()
+	{
+		return state;
+	}
+	
+	public static KeyboardKeyState getKeyState( boolean state )
+	{
+		if( state ) return PRESSED;
+		else if( !state ) return RELEASED;
+		return null;
+	}
 }

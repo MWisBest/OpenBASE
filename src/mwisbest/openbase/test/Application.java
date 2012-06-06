@@ -19,14 +19,23 @@
  */
 package mwisbest.openbase.test;
 
-import org.newdawn.slick.opengl.TextureImpl;
-
 import mwisbest.openbase.OpenBASE;
-import mwisbest.openbase.ResourceManager;
-import mwisbest.openbase.opengl.UtilsGL;
-import mwisbest.openbase.opengl.Widget;
+import mwisbest.openbase.event.EventHandler;
+import mwisbest.openbase.event.EventManager;
+import mwisbest.openbase.event.EventPriority;
+import mwisbest.openbase.event.Listener;
+import mwisbest.openbase.event.input.KeyboardEvent;
+import mwisbest.openbase.event.input.MouseEvent;
+import mwisbest.openbase.gui.Label;
+import mwisbest.openbase.gui.Texture;
+import mwisbest.openbase.input.KeyboardKey;
+import mwisbest.openbase.input.KeyboardKeyState;
+import mwisbest.openbase.input.MouseButton;
+import mwisbest.openbase.input.MouseButtonState;
+import mwisbest.openbase.resource.ResourceLoader;
+import mwisbest.openbase.resource.ResourceManager;
 
-public class Application extends OpenBASE
+public class Application extends OpenBASE implements Listener
 {
 	public static Application application;
 	
@@ -38,16 +47,16 @@ public class Application extends OpenBASE
 	@Override
 	public void loadResources()
 	{
-		ResourceManager.addWidget( "test", new Widget( UtilsGL.loadTexture( "GLicon256.png" ) ) );
-		ResourceManager.addFont( "BNE12", UtilsGL.loadFont( "BraveNewEra.ttf", 12 ) );
-		ResourceManager.addFont( "BNE24", UtilsGL.loadFont( "BraveNewEra.ttf", 24 ) );
+		ResourceManager.addWidget( "test", new Texture( ResourceLoader.loadTexture( "GLicon256.png" ) ) );
+		ResourceManager.addFont( "BNE12", ResourceLoader.loadFont( "BraveNewEra.ttf", 12 ) );
+		ResourceManager.addFont( "BNE24", ResourceLoader.loadFont( "BraveNewEra.ttf", 24 ) );
+		ResourceManager.addWidget( "testLabel", new Label( ResourceManager.getFont( "BNE24" ), "Hello!" ).setX( 200 ).setY( 200 ) );
+		EventManager.registerEvents( this, this );
 	}
 	
 	@Override
 	public void customRender()
 	{
-		TextureImpl.bindNone();
-		ResourceManager.getFont( "BNE24" ).drawString( 400, 300, "Hello!" );
 	}
 	
 	@Override
@@ -58,6 +67,23 @@ public class Application extends OpenBASE
 	@Override
 	public void customInput()
 	{
+	}
+	
+	@EventHandler( EventPriority.MONITOR )
+	public void handleKeyboardEvent( KeyboardEvent event )
+	{
+		if( !event.getRepeatEvent() )
+		{
+			if( event.getState() == KeyboardKeyState.PRESSED && event.getKey() != KeyboardKey.KEY_UNKNOWN ) System.out.println( "Key pressed!" );
+			else if( event.getState() == KeyboardKeyState.RELEASED && event.getKey() != KeyboardKey.KEY_UNKNOWN ) System.out.println( "Key released!" );
+		}
+	}
+	
+	@EventHandler( EventPriority.MONITOR )
+	public void handleMouseEvent( MouseEvent event )
+	{
+		if( event.getState() == MouseButtonState.PRESSED && event.getButton() != MouseButton.BUTTON_UNKNOWN ) System.out.println( "Mouse Button " + event.getButton() + " pressed!" );
+		else if( event.getState() == MouseButtonState.RELEASED && event.getButton() != MouseButton.BUTTON_UNKNOWN ) System.out.println( "Mouse Button " + event.getButton() + " released!" );
 	}
 	
 	public static void main( String[] argv )

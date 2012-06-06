@@ -21,21 +21,15 @@ package mwisbest.openbase;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
-import java.util.Map;
-import java.util.Map.Entry;
 
-import mwisbest.openbase.opengl.RenderPriority;
 import mwisbest.openbase.opengl.UtilsGL;
-import mwisbest.openbase.opengl.Widget;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
-import org.lwjgl.input.Mouse;
 import org.lwjgl.openal.AL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
-import org.newdawn.slick.openal.SoundStore;
 
 public abstract class OpenBASE
 {
@@ -95,7 +89,7 @@ public abstract class OpenBASE
 		this.start();
 	}
 	
-	public void start()
+	private void start()
 	{
 		theThread = new Thread()
 			{
@@ -109,7 +103,7 @@ public abstract class OpenBASE
 		theThread.start();
 	}
 	
-	public void init()
+	private void init()
 	{
 		try
 		{
@@ -119,6 +113,7 @@ public abstract class OpenBASE
 			Display.setFullscreen( false );
 			Display.create();
 			Display.setVSyncEnabled( windowVSync );
+			Keyboard.enableRepeatEvents( true );
 			
 			GL11.glEnable( GL11.GL_TEXTURE_2D );
 			GL11.glDisable( GL11.GL_DEPTH_TEST );
@@ -126,68 +121,49 @@ public abstract class OpenBASE
 			GL11.glLoadIdentity();
 			GL11.glOrtho( 0, windowWidth, windowHeight, 0, 1, -1 );
 		}
-		catch( LWJGLException e ) // handle LWJGL errors
+		catch( LWJGLException e )
 		{
 			e.printStackTrace();
 			System.exit( 0 );
 		}
-		catch( IOException e ) // Handle loadIcon errors
+		catch( IOException e )
 		{
 			e.printStackTrace();
 		}
 		
 		loadResources();
-		
 		mainLoop();
 	}
 	
-	public void mainLoop()
+	private void mainLoop()
 	{
-		while( this.running )
+		while( running )
 		{
-			input();
 			render();
 			audio();
+			input();
 		}
 		Display.destroy();
 		AL.destroy();
 	}
 	
-	public void render()
+	private void render()
 	{
-		GL11.glClear( GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT );
-		GL11.glMatrixMode( GL11.GL_MODELVIEW );
-		GL11.glLoadIdentity();
-		Map<String, Widget> theWidgets = ResourceManager.getWidgets();
-		RenderPriority[] rvalues = RenderPriority.values();
-		for( RenderPriority priority : rvalues )
-		{
-			for( Entry<String, Widget> widget : theWidgets.entrySet() )
-			{
-				if( widget.getValue().getRenderPriority() == priority && widget.getValue().getVisible() ) widget.getValue().render();
-			}
-		}
-		
+		Common.render();
 		customRender();
-		
 		Display.update();
-		if( Display.isCloseRequested() ) this.running = false;
+		if( Display.isCloseRequested() ) running = false;
 	}
 	
-	public void audio()
+	private void audio()
 	{
-		SoundStore.get().poll( 0 );
+		Common.audio();
 		customAudio();
 	}
 	
-	public void input()
+	private void input()
 	{
-		while( Mouse.next() )
-		{
-		}
-		while( Keyboard.next() )
-		{
-		}
+		Common.input();
 		customInput();
 	}
 	

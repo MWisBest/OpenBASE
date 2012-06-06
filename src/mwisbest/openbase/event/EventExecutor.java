@@ -17,29 +17,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.exception;
+package mwisbest.openbase.event;
 
-public class OpenBASEException extends Exception
+import mwisbest.openbase.exception.EventException;
+
+public interface EventExecutor
 {
-	private static final long serialVersionUID = 6103548155941293316L;
-	
-	public OpenBASEException()
-	{
-		super();
-	}
-	
-	public OpenBASEException( String message )
-	{
-		super( message );
-	}
-	
-	public OpenBASEException( String message, Throwable cause )
-	{
-		super( message, cause );
-	}
-	
-	public OpenBASEException( Throwable cause )
-	{
-		super( cause );
-	}
+	public void execute( Event event ) throws EventException;
 }

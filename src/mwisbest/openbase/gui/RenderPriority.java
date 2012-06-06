@@ -17,29 +17,42 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.exception;
+package mwisbest.openbase.gui;
 
-public class OpenBASEException extends Exception
+public enum RenderPriority
 {
-	private static final long serialVersionUID = 6103548155941293316L;
+	/**
+	 * Will render before (behind) all other Widgets.
+	 */
+	HIGHEST( 0 ),
+	/**
+	 * Will render before (behind) most Widgets.
+	 */
+	HIGH( 1 ),
+	/**
+	 * Will render at the same time as most Widgets.
+	 * 
+	 * This is the default RenderPriority.
+	 */
+	NORMAL( 2 ),
+	/**
+	 * Will render after (in front of) most Widgets.
+	 */
+	LOW( 3 ),
+	/**
+	 * Will render after (in front of) all other Widgets.
+	 */
+	LOWEST( 4 );
 	
-	public OpenBASEException()
+	private final int id;
+	
+	private RenderPriority( final int id )
 	{
-		super();
+		this.id = id;
 	}
 	
-	public OpenBASEException( String message )
+	public int getID()
 	{
-		super( message );
-	}
-	
-	public OpenBASEException( String message, Throwable cause )
-	{
-		super( message, cause );
-	}
-	
-	public OpenBASEException( Throwable cause )
-	{
-		super( cause );
+		return id;
 	}
 }

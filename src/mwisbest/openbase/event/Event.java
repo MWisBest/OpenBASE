@@ -21,5 +21,28 @@ package mwisbest.openbase.event;
 
 public abstract class Event
 {
+	private boolean beenCalled = false;
 	
+	public abstract HandlerList getHandlers();
+	
+	protected String getEventName()
+	{
+		return getClass().getSimpleName();
+	}
+	
+	public boolean getHasBeenCalled()
+	{
+		return beenCalled;
+	}
+	
+	public void setHasBeenCalled( boolean beenCalled )
+	{
+		this.beenCalled = beenCalled;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return getEventName() + " (" + getClass().getName() + ")";
+	}
 }

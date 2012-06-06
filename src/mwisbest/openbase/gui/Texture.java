@@ -17,90 +17,65 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.opengl;
+package mwisbest.openbase.gui;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.ByteBuffer;
-
-import javax.imageio.ImageIO;
-
-import org.lwjgl.BufferUtils;
+import org.lwjgl.opengl.ARBFramebufferObject;
 import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.EXTFramebufferObject;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GLContext;
-import org.newdawn.slick.opengl.PNGDecoder;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.util.ResourceLoader;
 
-public class UtilsGL
+public class Texture extends Widget
 {
-	public static ByteBuffer loadIcon( String path ) throws IOException
+	protected org.newdawn.slick.opengl.Texture texture = null;
+	protected int width = 0, height = 0;
+	
+	public Texture( org.newdawn.slick.opengl.Texture texture )
 	{
-		InputStream is = ResourceLoader.getResourceAsStream( path );
-		try
-		{
-			PNGDecoder decoder = new PNGDecoder( is );
-			ByteBuffer bb = ByteBuffer.allocateDirect( decoder.getWidth() * decoder.getHeight() * 4 );
-			decoder.decode( bb, decoder.getWidth() * 4, PNGDecoder.RGBA );
-			bb.flip();
-			return bb;
-		}
-		finally
-		{
-			is.close();
-		}
+		this.type = WidgetType.TEXTURE;
+		this.texture = texture;
+		this.width = texture.getImageWidth();
+		this.height = texture.getImageHeight();
 	}
 	
-	public static void takeScreenshot()
+	public org.newdawn.slick.opengl.Texture getTexture()
 	{
-		GL11.glReadBuffer( GL11.GL_FRONT );
-		int width = Display.getDisplayMode().getWidth();
-		int height = Display.getDisplayMode().getHeight();
-		int bpp = 4;
-		ByteBuffer buffer = BufferUtils.createByteBuffer( width * height * bpp );
-		GL11.glReadPixels( 0, 0, width, height, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buffer );
-		File file = new File( "Screenshot.png" );
-		String format = "PNG";
-		BufferedImage image = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
-		
-		for( int x = 0; x < width; x++ )
-			for( int y = 0; y < height; y++ )
-			{
-				int i = ( x + ( width * y ) ) * bpp;
-				int r = buffer.get( i ) & 0xFF;
-				int g = buffer.get( i + 1 ) & 0xFF;
-				int b = buffer.get( i + 2 ) & 0xFF;
-				image.setRGB( x, height - ( y + 1 ), ( 0xFF << 24 ) | ( r << 16 ) | ( g << 8 ) | b );
-			}
-		
-		try
-		{
-			ImageIO.write( image, format, file );
-		}
-		catch( IOException e )
-		{
-			e.printStackTrace();
-		}
+		return texture;
 	}
 	
-	/**
-	 * Draws the specified texture to positions x and y on the screen and scaled with the specified width and height
-	 * 
-	 * @param texture
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 */
-	public static void drawTexture( Texture texture, int x, int y, int width, int height )
+	public Widget setTexture( org.newdawn.slick.opengl.Texture texture )
+	{
+		this.texture = texture;
+		return this;
+	}
+	
+	public int getRenderWidth()
+	{
+		return width;
+	}
+	
+	public Widget setRenderWidth( int width )
+	{
+		this.width = width;
+		return this;
+	}
+	
+	public int getRenderHeight()
+	{
+		return height;
+	}
+	
+	public Widget setRenderHeight( int height )
+	{
+		this.height = height;
+		return this;
+	}
+	
+	@Override
+	public void render()
 	{
 		GL11.glTranslatef( x, y, 0 );
 		GL11.glPushMatrix();
@@ -113,10 +88,11 @@ public class UtilsGL
 		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST );
 		// Mipmap start
 		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST_MIPMAP_LINEAR );
-		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL12.GL_TEXTURE_MAX_LOD, 8 );
+		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL12.GL_TEXTURE_MAX_LOD, GL11.GL_POLYGON_BIT );
 		ContextCapabilities capabilities = GLContext.getCapabilities();
 		if( capabilities.OpenGL30 ) GL30.glGenerateMipmap( GL11.GL_TEXTURE_2D );
 		else if( capabilities.GL_EXT_framebuffer_object ) EXTFramebufferObject.glGenerateMipmapEXT( GL11.GL_TEXTURE_2D );
+		else if( capabilities.GL_ARB_framebuffer_object ) ARBFramebufferObject.glGenerateMipmap( GL11.GL_TEXTURE_2D );
 		else if( capabilities.OpenGL14 ) GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL14.GL_GENERATE_MIPMAP, GL11.GL_TRUE );
 		// Mipmap end
 		GL11.glBegin( GL11.GL_QUADS );

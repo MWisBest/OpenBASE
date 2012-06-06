@@ -17,29 +17,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.exception;
+package mwisbest.openbase.gui;
 
-public class OpenBASEException extends Exception
+import mwisbest.openbase.event.Listener;
+
+public abstract class Control extends Widget implements Listener
 {
-	private static final long serialVersionUID = 6103548155941293316L;
+	protected org.newdawn.slick.opengl.Texture texture = null;
+	protected int width = 0, height = 0;
 	
-	public OpenBASEException()
+	@Override
+	public void render()
 	{
-		super();
-	}
-	
-	public OpenBASEException( String message )
-	{
-		super( message );
-	}
-	
-	public OpenBASEException( String message, Throwable cause )
-	{
-		super( message, cause );
-	}
-	
-	public OpenBASEException( Throwable cause )
-	{
-		super( cause );
+		
 	}
 }

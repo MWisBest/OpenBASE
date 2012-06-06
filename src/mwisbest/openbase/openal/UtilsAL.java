@@ -27,10 +27,6 @@ import org.newdawn.slick.util.ResourceLoader;
 
 public class UtilsAL
 {
-	private UtilsAL()
-	{
-	}
-	
 	public static Audio loadSound( String pathToSound )
 	{
 		return loadSound( pathToSound, "OGG" );
@@ -49,23 +45,23 @@ public class UtilsAL
 		return null;
 	}
 	
-	public static void playAudio( Audio audio )
+	public static int playAudio( Audio audio )
 	{
-		playAudio( audio, false );
+		return playAudio( audio, false );
 	}
 	
-	public static void playAudio( Audio audio, boolean loop )
+	public static int playAudio( Audio audio, boolean loop )
 	{
-		audio.playAsMusic( 1.0F, 1.0F, loop );
+		return audio.playAsMusic( 1.0F, 1.0F, loop );
 	}
 	
-	public static void playEffect( Audio audio )
+	public static int playEffect( Audio audio )
 	{
-		playEffect( audio, false );
+		return playEffect( audio, false );
 	}
 	
-	public static void playEffect( Audio audio, boolean loop )
+	public static int playEffect( Audio audio, boolean loop )
 	{
-		audio.playAsSoundEffect( 1.0F, 1.0F, loop );
+		return audio.playAsSoundEffect( 1.0F, 1.0F, loop );
 	}
 }

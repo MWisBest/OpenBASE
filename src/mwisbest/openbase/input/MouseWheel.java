@@ -17,29 +17,45 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.exception;
+package mwisbest.openbase.input;
 
-public class OpenBASEException extends Exception
+import java.util.HashMap;
+import java.util.Map;
+
+/**
+ * An enum for the mouse's scroll wheel, supporting tilt wheel
+ * as well, as long as there is a way to support tilt wheel
+ * in actual code...
+ */
+public enum MouseWheel
 {
-	private static final long serialVersionUID = 6103548155941293316L;
+	WHEEL_UNKNOWN( -1 ),
+	WHEEL_UP( 0 ),
+	WHEEL_DOWN( 1 ),
+	WHEEL_LEFT( 2 ),
+	WHEEL_RIGHT( 3 );
 	
-	public OpenBASEException()
+	private final int wheelCode;
+	private static final Map<Integer, MouseWheel> lookupWheelCode = new HashMap<Integer, MouseWheel>();
+	
+	private MouseWheel( final int i )
 	{
-		super();
+		wheelCode = i;
 	}
 	
-	public OpenBASEException( String message )
+	public int getWheelCode()
 	{
-		super( message );
+		return wheelCode;
 	}
 	
-	public OpenBASEException( String message, Throwable cause )
+	public static MouseWheel getWheel( int wheel )
 	{
-		super( message, cause );
+		if( lookupWheelCode.containsKey( wheel ) ) return lookupWheelCode.get( wheel );
+		return WHEEL_UNKNOWN;
 	}
 	
-	public OpenBASEException( Throwable cause )
+	static
 	{
-		super( cause );
+		for( MouseWheel wheel : values() ) lookupWheelCode.put( wheel.wheelCode, wheel );
 	}
 }

@@ -17,42 +17,12 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.opengl;
+package mwisbest.openbase.event;
 
-public enum RenderPriority
+/**
+ * A blank interface that classes registering events with
+ * the EventHandler annotation need to implement.
+ */
+public interface Listener
 {
-	/**
-	 * Will render before (behind) all other Widgets.
-	 */
-	HIGHEST( 0 ),
-	/**
-	 * Will render before (behind) most Widgets.
-	 */
-	HIGH( 1 ),
-	/**
-	 * Will render at the same time as most Widgets.
-	 * 
-	 * This is the default RenderPriority.
-	 */
-	NORMAL( 2 ),
-	/**
-	 * Will render after (in front of) most Widgets.
-	 */
-	LOW( 3 ),
-	/**
-	 * Will render after (in front of) all other Widgets.
-	 */
-	LOWEST( 4 ), ;
-	
-	private final int id;
-	
-	RenderPriority( int id )
-	{
-		this.id = id;
-	}
-	
-	public int getID()
-	{
-		return id;
-	}
 }
