@@ -21,9 +21,9 @@ package mwisbest.openbase.util;
 
 import java.util.logging.Logger;
 
-public class Logging
+public class LoggerHelper
 {
-	public static final Logger logger = Logger.getLogger( "OpenBASE" );
+	private static final Logger logger = Logger.getLogger( "OpenBASE" );
 	
 	public static Logger getLogger()
 	{
