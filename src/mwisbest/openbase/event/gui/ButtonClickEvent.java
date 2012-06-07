@@ -17,45 +17,35 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.gui;
+package mwisbest.openbase.event.gui;
 
-import mwisbest.openbase.event.Listener;
+import mwisbest.openbase.event.Event;
+import mwisbest.openbase.event.HandlerList;
+import mwisbest.openbase.gui.Button;
 
-public abstract class Control extends Widget implements Listener
+public class ButtonClickEvent extends Event
 {
-	protected org.newdawn.slick.opengl.Texture texture = null;
-	protected int width = 0, height = 0;
+	private static HandlerList handlers = new HandlerList();
+	private Button button;
 	
-	public org.newdawn.slick.opengl.Texture getTexture()
+	public ButtonClickEvent( Button button )
 	{
-		return texture;
+		this.button = button;
 	}
 	
-	public Widget setTexture( org.newdawn.slick.opengl.Texture texture )
+	public Button getButton()
 	{
-		this.texture = texture;
-		return this;
+		return button;
 	}
 	
-	public int getRenderWidth()
+	@Override
+	public HandlerList getHandlers()
 	{
-		return width;
+		return handlers;
 	}
 	
-	public Widget setRenderWidth( int width )
+	public static HandlerList getHandlerList()
 	{
-		this.width = width;
-		return this;
-	}
-	
-	public int getRenderHeight()
-	{
-		return height;
-	}
-	
-	public Widget setRenderHeight( int height )
-	{
-		this.height = height;
-		return this;
+		return handlers;
 	}
 }

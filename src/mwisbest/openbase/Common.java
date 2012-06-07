@@ -24,10 +24,13 @@ import java.util.Map.Entry;
 
 import mwisbest.openbase.event.Event;
 import mwisbest.openbase.event.EventManager;
+import mwisbest.openbase.event.gui.ButtonClickEvent;
 import mwisbest.openbase.event.input.KeyboardEvent;
 import mwisbest.openbase.event.input.MouseEvent;
+import mwisbest.openbase.gui.Button;
 import mwisbest.openbase.gui.RenderPriority;
 import mwisbest.openbase.gui.Widget;
+import mwisbest.openbase.gui.WidgetType;
 import mwisbest.openbase.input.KeyboardKey;
 import mwisbest.openbase.input.KeyboardKeyState;
 import mwisbest.openbase.input.MouseButton;
@@ -58,8 +61,7 @@ public class Common
 		GL11.glMatrixMode( GL11.GL_MODELVIEW );
 		GL11.glLoadIdentity();
 		Map<String, Widget> theWidgets = ResourceManager.getWidgets();
-		//RenderPriority[] rvalues = RenderPriority.values();
-		for( RenderPriority priority : RenderPriority.values() /* rvalues */ )
+		for( RenderPriority priority : RenderPriority.values() )
 		{
 			for( Entry<String, Widget> widget : theWidgets.entrySet() )
 			{
@@ -89,6 +91,21 @@ public class Common
 		{
 			Event mouseEvent = new MouseEvent( MouseButton.getButton( Mouse.getEventButton() ), MouseButtonState.getButtonState( Mouse.getEventButtonState() ), Mouse.getEventX(), Mouse.getEventY(), Mouse.getEventDWheel() );
 			EventManager.callEvent( mouseEvent );
+			if( MouseButton.getButton( Mouse.getEventButton() ) == MouseButton.BUTTON_LEFT && MouseButtonState.getButtonState( Mouse.getEventButtonState() ) == MouseButtonState.PRESSED )
+			{
+				for( Entry<String, Widget> widget : ResourceManager.getWidgets().entrySet() )
+				{
+					if( widget.getValue().getWidgetType() == WidgetType.BUTTON && widget.getValue().getVisible() )
+					{
+						Button theWidget = (Button)widget.getValue();
+						//if( theWidget.isInside( Mouse.getEventX(), Mouse.getEventY() ) )
+						//{
+							Event buttonClickEvent = new ButtonClickEvent( theWidget );
+							EventManager.callEvent( buttonClickEvent );
+						//}
+					}
+				}
+			}
 		}
 		while( Keyboard.next() )
 		{

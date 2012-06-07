@@ -34,7 +34,7 @@ public abstract class Widget
 	protected RenderPriority priority = RenderPriority.NORMAL;
 	protected String tooltip = "";
 	protected int x = 0, y = 0;
-	protected WidgetType type;
+	protected WidgetType type = null;
 	
 	public int getX()
 	{
@@ -96,6 +96,11 @@ public abstract class Widget
 	{
 		this.tooltip = tooltip;
 		return this;
+	}
+	
+	public WidgetType getWidgetType()
+	{
+		return type;
 	}
 	
 	public abstract void render();
