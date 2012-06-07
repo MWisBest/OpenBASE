@@ -98,11 +98,11 @@ public class Common
 					if( widget.getValue().getWidgetType() == WidgetType.BUTTON && widget.getValue().getVisible() )
 					{
 						Button theWidget = (Button)widget.getValue();
-						//if( theWidget.isInside( Mouse.getEventX(), Mouse.getEventY() ) )
-						//{
+						if( theWidget.isInside( Mouse.getEventX(), Mouse.getEventY() ) )
+						{
 							Event buttonClickEvent = new ButtonClickEvent( theWidget );
 							EventManager.callEvent( buttonClickEvent );
-						//}
+						}
 					}
 				}
 			}
