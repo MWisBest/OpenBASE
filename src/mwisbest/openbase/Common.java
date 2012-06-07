@@ -39,6 +39,7 @@ import mwisbest.openbase.resource.ResourceManager;
 
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.input.Mouse;
+import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 import org.newdawn.slick.openal.SoundStore;
 
@@ -89,7 +90,7 @@ public class Common
 	{
 		while( Mouse.next() )
 		{
-			Event mouseEvent = new MouseEvent( MouseButton.getButton( Mouse.getEventButton() ), MouseButtonState.getButtonState( Mouse.getEventButtonState() ), Mouse.getEventX(), Mouse.getEventY(), Mouse.getEventDWheel() );
+			Event mouseEvent = new MouseEvent( MouseButton.getButton( Mouse.getEventButton() ), MouseButtonState.getButtonState( Mouse.getEventButtonState() ), Mouse.getEventX(), Display.getHeight() - Mouse.getEventY(), Mouse.getEventDWheel() );
 			EventManager.callEvent( mouseEvent );
 			if( MouseButton.getButton( Mouse.getEventButton() ) == MouseButton.BUTTON_LEFT && MouseButtonState.getButtonState( Mouse.getEventButtonState() ) == MouseButtonState.PRESSED )
 			{
@@ -98,7 +99,7 @@ public class Common
 					if( widget.getValue().getWidgetType() == WidgetType.BUTTON && widget.getValue().getVisible() )
 					{
 						Button theWidget = (Button)widget.getValue();
-						if( theWidget.isInside( Mouse.getEventX(), Mouse.getEventY() ) )
+						if( theWidget.isInside( Mouse.getEventX(), Display.getHeight() - Mouse.getEventY() ) )
 						{
 							Event buttonClickEvent = new ButtonClickEvent( theWidget );
 							EventManager.callEvent( buttonClickEvent );
