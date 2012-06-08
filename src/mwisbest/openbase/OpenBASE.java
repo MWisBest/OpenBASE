@@ -27,6 +27,7 @@ import mwisbest.openbase.opengl.UtilsGL;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.openal.AL;
+import org.lwjgl.opencl.CL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 import org.lwjgl.opengl.GL11;
@@ -114,7 +115,8 @@ public abstract class OpenBASE
 			Display.create();
 			Display.setVSyncEnabled( windowVSync );
 			Keyboard.enableRepeatEvents( true );
-			
+			AL.create();
+			CL.create();
 			GL11.glEnable( GL11.GL_TEXTURE_2D );
 			GL11.glDisable( GL11.GL_DEPTH_TEST );
 			GL11.glMatrixMode( GL11.GL_PROJECTION );
@@ -144,6 +146,7 @@ public abstract class OpenBASE
 			input();
 		}
 		Display.destroy();
+		CL.destroy();
 		AL.destroy();
 	}
 	

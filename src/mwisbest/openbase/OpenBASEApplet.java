@@ -26,6 +26,7 @@ import java.awt.Canvas;
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.openal.AL;
+import org.lwjgl.opencl.CL;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
 
@@ -109,7 +110,8 @@ public abstract class OpenBASEApplet extends Applet
 						Display.setParent( displayParent );
 						Display.create();
 						Keyboard.enableRepeatEvents( true );
-						
+						AL.create();
+						CL.create();
 						GL11.glEnable( GL11.GL_TEXTURE_2D );
 						GL11.glDisable( GL11.GL_DEPTH_TEST );
 						GL11.glMatrixMode( GL11.GL_PROJECTION );
@@ -206,6 +208,7 @@ public abstract class OpenBASEApplet extends Applet
 			input();
 		}
 		Display.destroy();
+		CL.destroy();
 		AL.destroy();
 	}
 	
