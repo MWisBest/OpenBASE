@@ -23,7 +23,6 @@ import java.io.IOException;
 import java.nio.ByteBuffer;
 
 import mwisbest.openbase.math.FloatMatrix;
-import mwisbest.openbase.opengl.MatrixHelper;
 import mwisbest.openbase.opengl.UtilsGL;
 
 import org.lwjgl.LWJGLException;
@@ -40,7 +39,6 @@ public abstract class OpenBASE
 	private int windowWidth = 640, windowHeight = 360;
 	private String windowTitle = "OpenBASE", windowIcon16Loc = "GLicon16.png", windowIcon32Loc = "GLicon32.png";
 	private boolean windowVSync = false, running = false;
-	private MatrixHelper matrixHelper = new MatrixHelper();
 	
 	public OpenBASE()
 	{
@@ -179,9 +177,4 @@ public abstract class OpenBASE
 	public abstract void customAudio();
 	
 	public abstract void customInput();
-	
-	public MatrixHelper getMatrixHelper()
-	{
-		return matrixHelper;
-	}
 }
