@@ -23,6 +23,8 @@ import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 
+import mwisbest.openbase.math.FloatMatrix;
+
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.openal.AL;
@@ -115,8 +117,7 @@ public abstract class OpenBASEApplet extends Applet
 						GL11.glEnable( GL11.GL_TEXTURE_2D );
 						GL11.glDisable( GL11.GL_DEPTH_TEST );
 						GL11.glMatrixMode( GL11.GL_PROJECTION );
-						GL11.glLoadIdentity();
-						GL11.glOrtho( 0, canvasWidth, canvasHeight, 0, 1, -1 );
+						GL11.glLoadMatrix( FloatMatrix.glOrtho( 0, canvasWidth, canvasHeight, 0, 1, -1 ).asFloatBuffer() );
 					}
 					catch( LWJGLException e )
 					{

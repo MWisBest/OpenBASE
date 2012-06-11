@@ -26,6 +26,7 @@ import mwisbest.openbase.event.EventPriority;
 import mwisbest.openbase.event.Listener;
 import mwisbest.openbase.event.input.KeyboardEvent;
 import mwisbest.openbase.event.input.MouseEvent;
+import mwisbest.openbase.gui.Button;
 import mwisbest.openbase.gui.Label;
 import mwisbest.openbase.gui.Texture;
 import mwisbest.openbase.input.KeyboardKey;
@@ -52,6 +53,18 @@ public class Applet extends OpenBASEApplet implements Listener
 		ResourceManager.addFont( "BNE12", ResourceLoader.loadFont( "BraveNewEra.ttf", 12 ) );
 		ResourceManager.addFont( "BNE24", ResourceLoader.loadFont( "BraveNewEra.ttf", 24 ) );
 		ResourceManager.addWidget( "testLabel", new Label( ResourceManager.getFont( "BNE24" ), "Hello!" ).setX( 200 ).setY( 200 ) );
+		ResourceManager.addTexture( "testButtonOff", ResourceLoader.loadTexture( "TestButtonOff.png" ) );
+		ResourceManager.addTexture( "testButtonOn", ResourceLoader.loadTexture( "TestButtonOn.png" ) );
+		ResourceManager.addWidget( "testButton",
+			new Button( ResourceManager.getTexture( "testButtonOff" ) )
+			{
+				@Override
+				public void onButtonClick()
+				{
+					if( getTexture().equals( ResourceManager.getTexture( "testButtonOff" ) ) ) setTexture( ResourceManager.getTexture( "testButtonOn" ) );
+					else setTexture( ResourceManager.getTexture( "testButtonOff" ) );
+				}
+			} );
 		EventManager.registerEvents( this, this );
 	}
 	

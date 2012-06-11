@@ -22,6 +22,8 @@ package mwisbest.openbase;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+import mwisbest.openbase.math.FloatMatrix;
+import mwisbest.openbase.opengl.MatrixHelper;
 import mwisbest.openbase.opengl.UtilsGL;
 
 import org.lwjgl.LWJGLException;
@@ -38,6 +40,7 @@ public abstract class OpenBASE
 	private int windowWidth = 640, windowHeight = 360;
 	private String windowTitle = "OpenBASE", windowIcon16Loc = "GLicon16.png", windowIcon32Loc = "GLicon32.png";
 	private boolean windowVSync = false, running = false;
+	private MatrixHelper matrixHelper = new MatrixHelper();
 	
 	public OpenBASE()
 	{
@@ -120,8 +123,7 @@ public abstract class OpenBASE
 			GL11.glEnable( GL11.GL_TEXTURE_2D );
 			GL11.glDisable( GL11.GL_DEPTH_TEST );
 			GL11.glMatrixMode( GL11.GL_PROJECTION );
-			GL11.glLoadIdentity();
-			GL11.glOrtho( 0, windowWidth, windowHeight, 0, 1, -1 );
+			GL11.glLoadMatrix( FloatMatrix.glOrtho( 0, windowWidth, windowHeight, 0, 1, -1 ).asFloatBuffer() );
 		}
 		catch( LWJGLException e )
 		{
@@ -177,4 +179,9 @@ public abstract class OpenBASE
 	public abstract void customAudio();
 	
 	public abstract void customInput();
+	
+	public MatrixHelper getMatrixHelper()
+	{
+		return matrixHelper;
+	}
 }
