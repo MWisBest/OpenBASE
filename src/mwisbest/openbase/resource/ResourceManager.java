@@ -31,12 +31,12 @@ import org.newdawn.slick.opengl.Texture;
 
 public class ResourceManager
 {
-	private static final Map<String, Font> fonts = new HashMap<String, Font>();
-	private static final Map<String, String> parameters = new HashMap<String, String>();
-	private static final Map<String, Music> musics = new HashMap<String, Music>();
-	private static final Map<String, Sound> sounds = new HashMap<String, Sound>();
-	private static final Map<String, Texture> textures = new HashMap<String, Texture>();
-	private static final Map<String, Widget> widgets = new HashMap<String, Widget>();
+	private static final Map<String, Font> fonts = new HashMap<>();
+	private static final Map<String, String> parameters = new HashMap<>();
+	private static final Map<String, Music> musics = new HashMap<>();
+	private static final Map<String, Sound> sounds = new HashMap<>();
+	private static final Map<String, Texture> textures = new HashMap<>();
+	private static final Map<String, Widget> widgets = new HashMap<>();
 	
 	public static void addFont( String key, Font font )
 	{

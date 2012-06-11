@@ -51,7 +51,7 @@ public enum MouseButton
 	SCROLL_DOWN( -2 );
 	
 	private final int buttonCode;
-	private static final Map<Integer, MouseButton> lookupButtonCode = new HashMap<Integer, MouseButton>();
+	private static final Map<Integer, MouseButton> lookupButtonCode = new HashMap<>();
 	
 	private MouseButton( final int buttonCode )
 	{

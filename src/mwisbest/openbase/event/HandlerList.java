@@ -29,11 +29,11 @@ public class HandlerList
 {
 	private ListenerRegistration[] handlers = null;
 	private final EnumMap<EventPriority, List<ListenerRegistration>> handlerSlots;
-	private static final ArrayList<HandlerList> allHandlers = new ArrayList<HandlerList>();
+	private static final ArrayList<HandlerList> allHandlers = new ArrayList<>();
 	
 	public HandlerList()
 	{
-		handlerSlots = new EnumMap<EventPriority, List<ListenerRegistration>>( EventPriority.class );
+		handlerSlots = new EnumMap<>( EventPriority.class );
 		for( EventPriority priority : EventPriority.values() ) handlerSlots.put( priority, new ArrayList<ListenerRegistration>() );
 		allHandlers.add( this );
 	}
@@ -52,7 +52,7 @@ public class HandlerList
 	{
 		ListenerRegistration[] handlers = this.handlers;
 		if( handlers != null ) return handlers;
-		List<ListenerRegistration> entries = new ArrayList<ListenerRegistration>();
+		List<ListenerRegistration> entries = new ArrayList<>();
 		for( Entry<EventPriority, List<ListenerRegistration>> entry : handlerSlots.entrySet() ) entries.addAll( entry.getValue() );
 		this.handlers = handlers = entries.toArray( new ListenerRegistration[entries.size()]);
 		return handlers;

@@ -36,7 +36,7 @@ public enum MouseWheel
 	WHEEL_RIGHT( 3 );
 	
 	private final int wheelCode;
-	private static final Map<Integer, MouseWheel> lookupWheelCode = new HashMap<Integer, MouseWheel>();
+	private static final Map<Integer, MouseWheel> lookupWheelCode = new HashMap<>();
 	
 	private MouseWheel( final int i )
 	{

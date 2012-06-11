@@ -155,7 +155,7 @@ public enum KeyboardKey
 	KEYBOARD_SIZE( 256 );
 	
 	private final int keyCode;
-	private static final Map<Integer, KeyboardKey> lookupKeyCode = new HashMap<Integer, KeyboardKey>();
+	private static final Map<Integer, KeyboardKey> lookupKeyCode = new HashMap<>();
 	
 	private KeyboardKey( final int keyCode )
 	{
