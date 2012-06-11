@@ -44,18 +44,13 @@ public class UtilsGL
 {
 	public static ByteBuffer loadIcon( String path ) throws IOException
 	{
-		InputStream is = ResourceLoader.getResourceAsStream( path );
-		try
+		try( InputStream is = ResourceLoader.getResourceAsStream( path ); )
 		{
 			PNGDecoder decoder = new PNGDecoder( is );
 			ByteBuffer bb = ByteBuffer.allocateDirect( decoder.getWidth() * decoder.getHeight() * 4 );
 			decoder.decode( bb, decoder.getWidth() * 4, PNGDecoder.RGBA );
 			bb.flip();
 			return bb;
-		}
-		finally
-		{
-			is.close();
 		}
 	}
 	
