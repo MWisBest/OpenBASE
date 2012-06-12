@@ -191,4 +191,9 @@ public class DoubleMatrix
 		if( column < 0 || column >= size ) throw new IllegalArgumentException( "Column must be between 0 and " + ( size - 1 ) + "." );
 		data[index( row, column, size )] = value;
 	}
+	
+	public static double[] toArray( DoubleMatrix matrix )
+	{
+		return matrix.data.clone();
+	}
 }
