@@ -97,7 +97,6 @@ public class ResourceLoader
 		return loadFont( pathToFont, size, false, false, color );
 	}
 	
-	@SuppressWarnings( "unchecked" )
 	public static UnicodeFont loadFont( String pathToFont, int size, boolean bold, boolean italic, Color color )
 	{
 		try
