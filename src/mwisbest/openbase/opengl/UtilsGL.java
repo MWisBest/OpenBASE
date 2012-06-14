@@ -48,7 +48,7 @@ public class UtilsGL
 		{
 			PNGDecoder decoder = new PNGDecoder( is );
 			ByteBuffer bb = ByteBuffer.allocateDirect( decoder.getWidth() * decoder.getHeight() * 4 );
-			decoder.decode( bb, decoder.getWidth() * 4, PNGDecoder.RGBA );
+			decoder.decode( bb, decoder.getWidth() * 4, PNGDecoder.Format.RGBA );
 			bb.flip();
 			return bb;
 		}
