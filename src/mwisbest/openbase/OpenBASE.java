@@ -93,7 +93,7 @@ public abstract class OpenBASE
 	
 	private void start()
 	{
-		theThread = new Thread()
+		theThread = new Thread( "[OpenBASE] Main" )
 			{
 				@Override
 				public void run()

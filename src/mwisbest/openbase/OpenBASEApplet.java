@@ -101,7 +101,7 @@ public abstract class OpenBASEApplet extends Applet
 	
 	private void startLWJGL()
 	{
-		theThread = new Thread()
+		theThread = new Thread( "[OpenBASE] Main" )
 			{
 				@Override
 				public void run()
