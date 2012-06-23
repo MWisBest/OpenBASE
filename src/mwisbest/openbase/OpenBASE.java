@@ -22,6 +22,7 @@ package mwisbest.openbase;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
+import mwisbest.mwtils.thread.SleepThreadHackery;
 import mwisbest.openbase.math.FloatMatrix;
 import mwisbest.openbase.opengl.UtilsGL;
 
@@ -93,6 +94,7 @@ public abstract class OpenBASE
 	
 	private void start()
 	{
+		new SleepThreadHackery( "[OpenBASE] Sleep Thread Hackery" );
 		theThread = new Thread( "[OpenBASE] Main" )
 			{
 				@Override

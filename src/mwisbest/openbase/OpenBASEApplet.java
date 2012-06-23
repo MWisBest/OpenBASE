@@ -23,6 +23,7 @@ import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
 
+import mwisbest.mwtils.thread.SleepThreadHackery;
 import mwisbest.openbase.math.FloatMatrix;
 
 import org.lwjgl.LWJGLException;
@@ -35,8 +36,7 @@ import org.lwjgl.opengl.GL11;
 public abstract class OpenBASEApplet extends Applet
 {
 	private static final long serialVersionUID = -3837899243800598866L;
-	private int canvasWidth = 640;
-	private int canvasHeight = 360;
+	private int canvasWidth = 640, canvasHeight = 360;
 	@SuppressWarnings( "unused" )
 	private String canvasTitle = "OpenBASE";
 	@SuppressWarnings( "unused" )
@@ -44,10 +44,9 @@ public abstract class OpenBASEApplet extends Applet
 	@SuppressWarnings( "unused" )
 	private String canvasIcon32Loc = "GLicon32.png";
 	@SuppressWarnings( "unused" )
-	private boolean canvasVSync = false;
+	private boolean canvasVSync = false, running = false;
 	private Canvas displayParent = null;
 	private Thread theThread = null;
-	private boolean running = false;
 	
 	public OpenBASEApplet()
 	{
@@ -101,6 +100,7 @@ public abstract class OpenBASEApplet extends Applet
 	
 	private void startLWJGL()
 	{
+		new SleepThreadHackery( "[OpenBASE] Sleep Thread Hackery" );
 		theThread = new Thread( "[OpenBASE] Main" )
 			{
 				@Override

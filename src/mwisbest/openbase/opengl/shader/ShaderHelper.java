@@ -17,16 +17,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package mwisbest.openbase.opengl;
+package mwisbest.openbase.opengl.shader;
 
-import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Scanner;
 
+import mwisbest.openbase.exception.ProgramCreateException;
 import mwisbest.openbase.exception.ShaderCompileException;
 
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
+import org.newdawn.slick.util.ResourceLoader;
 
 public class ShaderHelper
 {
@@ -39,16 +42,17 @@ public class ShaderHelper
 		
 		if( status != GL11.GL_TRUE )
 		{
-			String error = GL20.glGetShaderInfoLog( shader, 255 );
+			int length = GL20.glGetShader( shader, GL20.GL_INFO_LOG_LENGTH );
+			String error = GL20.glGetShaderInfoLog( shader, length );
 			throw new ShaderCompileException( "Compile Error in " + ( ( type == GL20.GL_FRAGMENT_SHADER ) ? "Fragment Shader" : ( type == GL20.GL_VERTEX_SHADER ) ? "Vertex Shader" : "Geometry Shader" ) + ": " + error + "." );
 		}
 		
 		return shader;
 	}
 	
-	public static String readShaderSource( String file ) throws IOException
+	public static String readShaderSource( String fileLoc ) throws IOException
 	{
-		try( FileInputStream fis = new FileInputStream( file ); Scanner scanner = new Scanner( fis ); )
+		try( InputStream file = ResourceLoader.getResourceAsStream( fileLoc ); Scanner scanner = new Scanner( file ); )
 		{
 			StringBuilder source = new StringBuilder();
 		
@@ -56,5 +60,24 @@ public class ShaderHelper
 		
 			return source.toString();
 		}
+	}
+	
+	public static int createProgram( ArrayList<Integer> shaderList )
+	{
+		int program = GL20.glCreateProgram();
+		for( Integer shader : shaderList ) GL20.glAttachShader( program, shader );
+		GL20.glLinkProgram( program );
+		int status = GL20.glGetProgram( program, GL20.GL_LINK_STATUS );
+		
+		if( status == GL11.GL_FALSE )
+		{
+			int length = GL20.glGetProgram( program, GL20.GL_INFO_LOG_LENGTH );
+			String error = GL20.glGetProgramInfoLog( program, length );
+			throw new ProgramCreateException( "Compile Error in GL Program: " + error + "." );
+		}
+		
+		for( Integer shader : shaderList ) GL20.glDetachShader( program, shader );
+		
+		return program;
 	}
 }
