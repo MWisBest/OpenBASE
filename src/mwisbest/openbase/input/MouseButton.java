@@ -1,7 +1,7 @@
 /*
  * This file is part of OpenBASE.
  *
- * Copyright Â© 2012, Kyle Repinski
+ * Copyright © 2012, Kyle Repinski
  * OpenBASE is licensed under the GNU Lesser General Public License.
  *
  * OpenBASE is free software: you can redistribute it and/or modify
@@ -27,6 +27,7 @@ import java.util.Map;
  * 
  * 17 was the maximum amount of buttons on the mouses on NewEgg. :)
  */
+@SuppressWarnings( "boxing" )
 public enum MouseButton
 {
 	BUTTON_UNKNOWN( -1 ),

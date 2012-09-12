@@ -1,7 +1,7 @@
 /*
  * This file is part of OpenBASE.
  *
- * Copyright Â© 2012, Kyle Repinski
+ * Copyright © 2012, Kyle Repinski
  * OpenBASE is licensed under the GNU Lesser General Public License.
  *
  * OpenBASE is free software: you can redistribute it and/or modify
@@ -27,6 +27,7 @@ import java.util.Map;
  * as well, as long as there is a way to support tilt wheel
  * in actual code...
  */
+@SuppressWarnings( "boxing" )
 public enum MouseWheel
 {
 	WHEEL_UNKNOWN( -1 ),

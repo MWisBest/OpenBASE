@@ -1,7 +1,7 @@
 /*
  * This file is part of OpenBASE.
  *
- * Copyright Â© 2012, Kyle Repinski
+ * Copyright © 2012, Kyle Repinski
  * OpenBASE is licensed under the GNU Lesser General Public License.
  *
  * OpenBASE is free software: you can redistribute it and/or modify
@@ -96,7 +96,7 @@ public class EventManager
 		catch( NoSuchMethodException e )
 		{
 			if( eventClass.getSuperclass() != null && !eventClass.getSuperclass().equals( Event.class ) && Event.class.isAssignableFrom( eventClass.getSuperclass() ) ) return getRegistrationClass( eventClass.getSuperclass().asSubclass( Event.class ) );
-			else throw new AccessException( "Unable to find handler list for event: " + eventClass.getName() + "." );
+			throw new AccessException( "Unable to find handler list for event: " + eventClass.getName() + "." );
 		}
 	}
 	
@@ -129,7 +129,7 @@ public class EventManager
 				LoggerHelper.getLogger().severe( "Wrong method arguments used for event type registered." );
 				continue;
 			}
-			else eventClass = checkClass.asSubclass( Event.class );
+			eventClass = checkClass.asSubclass( Event.class );
 			method.setAccessible( true );
 			Set<ListenerRegistration> eventSet = ret.get( eventClass );
 			if( eventSet == null )
@@ -151,7 +151,7 @@ public class EventManager
 						catch( InvocationTargetException e )
 						{
 							if( e.getCause() instanceof EventException ) throw (EventException)e.getCause();
-							else throw new EventException( e.getCause() );
+							throw new EventException( e.getCause() );
 						}
 						catch( Throwable t )
 						{

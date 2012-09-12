@@ -1,7 +1,7 @@
 /*
  * This file is part of OpenBASE.
  *
- * Copyright Â© 2012, Kyle Repinski
+ * Copyright © 2012, Kyle Repinski
  * OpenBASE is licensed under the GNU Lesser General Public License.
  *
  * OpenBASE is free software: you can redistribute it and/or modify
@@ -67,9 +67,8 @@ public class ResourceLoader
 	@Deprecated
 	public static TrueTypeFont loadFont( String pathToFont, float size, boolean antiAlias )
 	{
-		try
+		try( InputStream inputstream = org.newdawn.slick.util.ResourceLoader.getResourceAsStream( pathToFont ) )
 		{
-			InputStream inputstream = org.newdawn.slick.util.ResourceLoader.getResourceAsStream( pathToFont );
 			java.awt.Font awtFont = Font.createFont( java.awt.Font.TRUETYPE_FONT, inputstream );
 			awtFont = awtFont.deriveFont( size );
 			TrueTypeFont font = new TrueTypeFont( awtFont, antiAlias );
