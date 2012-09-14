@@ -25,6 +25,7 @@ import java.nio.ByteBuffer;
 import mwisbest.mwtils.thread.SleepThreadHackery;
 import mwisbest.openbase.math.FloatMatrix;
 import mwisbest.openbase.opengl.UtilsGL;
+import mwisbest.openbase.util.LoggerHelper;
 
 import org.lwjgl.LWJGLException;
 import org.lwjgl.input.Keyboard;
@@ -145,7 +146,14 @@ public abstract class OpenBASE
 			Display.setVSyncEnabled( this.windowVSync );
 			Keyboard.enableRepeatEvents( true );
 			AL.create();
-			CL.create();
+			try
+			{
+				CL.create();
+			}
+			catch( LWJGLException e )
+			{
+				LoggerHelper.getLogger().info( "OpenCL not supported: Disabling OpenCL." );
+			}
 			GL11.glEnable( GL11.GL_TEXTURE_2D );
 			GL11.glDisable( GL11.GL_DEPTH_TEST );
 			GL11.glMatrixMode( GL11.GL_PROJECTION );
@@ -174,7 +182,14 @@ public abstract class OpenBASE
 			this.input();
 		}
 		Display.destroy();
-		CL.destroy();
+		try
+		{
+			CL.destroy();
+		}
+		catch( Exception e )
+		{
+			// CL Not supported
+		}
 		AL.destroy();
 	}
 	
