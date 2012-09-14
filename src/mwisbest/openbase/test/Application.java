@@ -27,6 +27,7 @@ import mwisbest.openbase.event.Listener;
 import mwisbest.openbase.event.input.KeyboardEvent;
 import mwisbest.openbase.event.input.MouseEvent;
 import mwisbest.openbase.gui.Button;
+import mwisbest.openbase.gui.Checkbox;
 import mwisbest.openbase.gui.Label;
 import mwisbest.openbase.gui.Texture;
 import mwisbest.openbase.input.KeyboardKey;
@@ -64,6 +65,16 @@ public class Application extends OpenBASE implements Listener
 					else setTexture( ResourceManager.getTexture( "testButtonOff" ) );
 				}
 			} );
+		ResourceManager.addWidget( "testCheckbox",
+			new Checkbox( ResourceManager.getTexture( "testButtonOff" ) )
+			{
+				@Override
+				public void onStateChanged( boolean state )
+				{
+					if( state ) setTexture( ResourceManager.getTexture( "testButtonOn" ) );
+					else setTexture( ResourceManager.getTexture( "testButtonOff" ) );
+				}
+			}.setPosition( 384, 128 ) );
 		EventManager.registerEvents( this, this );
 	}
 	

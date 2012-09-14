@@ -1,28 +1,4 @@
-/*
- * This file is part of OpenBASE.
- *
- * Copyright © 2012, Kyle Repinski
- * OpenBASE is licensed under the GNU Lesser General Public License.
- *
- * OpenBASE is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * OpenBASE is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
- * GNU Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public License
- * along with this program. If not, see <http://www.gnu.org/licenses/>.
- */
 package mwisbest.openbase.gui;
-
-import mwisbest.openbase.event.EventHandler;
-import mwisbest.openbase.event.EventManager;
-import mwisbest.openbase.event.EventPriority;
-import mwisbest.openbase.event.gui.ButtonClickEvent;
 
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.ARBFramebufferObject;
@@ -34,25 +10,42 @@ import org.lwjgl.opengl.GL14;
 import org.lwjgl.opengl.GL30;
 import org.lwjgl.opengl.GLContext;
 
-public class Button extends Control
+import mwisbest.openbase.event.EventHandler;
+import mwisbest.openbase.event.EventManager;
+import mwisbest.openbase.event.EventPriority;
+import mwisbest.openbase.event.gui.CheckboxClickEvent;
+
+public class Checkbox extends Control
 {
-	public Button( org.newdawn.slick.opengl.Texture texture )
+	protected boolean state;
+	
+	public Checkbox( org.newdawn.slick.opengl.Texture texture )
 	{
-		this.type = WidgetType.BUTTON;
+		this.type = WidgetType.CHECKBOX;
 		this.texture = texture;
 		this.width = texture.getImageWidth();
 		this.height = texture.getImageHeight();
+		this.state = false;
 		EventManager.registerEvents( this, this );
 	}
 	
-	public void onButtonClick()
+	/**
+	 * Called when the checkbox is clicked.
+	 * 
+	 * @param state True if the checkbox is now checked, false if not.
+	 */
+	public void onStateChanged( boolean state )
 	{
 	}
 	
 	@EventHandler( EventPriority.MONITOR )
-	private void onClick( ButtonClickEvent event )
+	private void onClick( CheckboxClickEvent event )
 	{
-		if( event.getButton() == this ) onButtonClick();
+		if( event.getCheckbox() == this )
+		{
+			state = !state;
+			onStateChanged( state );
+		}
 	}
 	
 	public boolean isInside( int x, int y )

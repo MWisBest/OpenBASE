@@ -25,9 +25,11 @@ import java.util.Map.Entry;
 import mwisbest.openbase.event.Event;
 import mwisbest.openbase.event.EventManager;
 import mwisbest.openbase.event.gui.ButtonClickEvent;
+import mwisbest.openbase.event.gui.CheckboxClickEvent;
 import mwisbest.openbase.event.input.KeyboardEvent;
 import mwisbest.openbase.event.input.MouseEvent;
 import mwisbest.openbase.gui.Button;
+import mwisbest.openbase.gui.Checkbox;
 import mwisbest.openbase.gui.RenderPriority;
 import mwisbest.openbase.gui.Widget;
 import mwisbest.openbase.gui.WidgetType;
@@ -103,6 +105,15 @@ public class Common
 						{
 							Event buttonClickEvent = new ButtonClickEvent( theWidget );
 							EventManager.callEvent( buttonClickEvent );
+						}
+					}
+					else if( widget.getValue().getWidgetType() == WidgetType.CHECKBOX && widget.getValue().getVisible() )
+					{
+						Checkbox theWidget = (Checkbox)widget.getValue();
+						if( theWidget.isInside( Mouse.getEventX(), Display.getHeight() - Mouse.getEventY() ) )
+						{
+							Event checkboxClickEvent = new CheckboxClickEvent( theWidget );
+							EventManager.callEvent( checkboxClickEvent );
 						}
 					}
 				}
