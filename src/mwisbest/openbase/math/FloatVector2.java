@@ -35,12 +35,12 @@ public class FloatVector2 implements Serializable
 	
 	public float getX()
 	{
-		return x;
+		return this.x;
 	}
 	
 	public float getY()
 	{
-		return y;
+		return this.y;
 	}
 	
 	public FloatVector2 add( FloatVector2 vector )

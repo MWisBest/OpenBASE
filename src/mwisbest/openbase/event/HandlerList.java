@@ -33,8 +33,8 @@ public class HandlerList
 	
 	public HandlerList()
 	{
-		handlerSlots = new EnumMap<>( EventPriority.class );
-		for( EventPriority priority : EventPriority.values() ) handlerSlots.put( priority, new ArrayList<ListenerRegistration>() );
+		this.handlerSlots = new EnumMap<>( EventPriority.class );
+		for( EventPriority priority : EventPriority.values() ) this.handlerSlots.put( priority, new ArrayList<ListenerRegistration>() );
 		allHandlers.add( this );
 	}
 	
@@ -42,9 +42,9 @@ public class HandlerList
 	{
 		for( ListenerRegistration listener : listeners )
 		{
-			if( handlerSlots.get( listener.getPriority() ).contains( listener ) ) throw new IllegalStateException( "This listener is already registered to priority " + listener.getPriority().toString() );
-			handlers = null;
-			handlerSlots.get( listener.getPriority() ).add( listener );
+			if( this.handlerSlots.get( listener.getPriority() ).contains( listener ) ) throw new IllegalStateException( "This listener is already registered to priority " + listener.getPriority().toString() );
+			this.handlers = null;
+			this.handlerSlots.get( listener.getPriority() ).add( listener );
 		}
 	}
 	
@@ -53,8 +53,8 @@ public class HandlerList
 		ListenerRegistration[] handlers = this.handlers;
 		if( handlers != null ) return handlers;
 		List<ListenerRegistration> entries = new ArrayList<>();
-		for( Entry<EventPriority, List<ListenerRegistration>> entry : handlerSlots.entrySet() ) entries.addAll( entry.getValue() );
-		this.handlers = handlers = entries.toArray( new ListenerRegistration[entries.size()]);
+		for( Entry<EventPriority, List<ListenerRegistration>> entry : this.handlerSlots.entrySet() ) entries.addAll( entry.getValue() );
+		this.handlers = handlers = entries.toArray( new ListenerRegistration[entries.size()] );
 		return handlers;
 	}
 }

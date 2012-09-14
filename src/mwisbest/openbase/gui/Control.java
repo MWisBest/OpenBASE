@@ -28,7 +28,7 @@ public abstract class Control extends Widget implements Listener
 	
 	public org.newdawn.slick.opengl.Texture getTexture()
 	{
-		return texture;
+		return this.texture;
 	}
 	
 	public Widget setTexture( org.newdawn.slick.opengl.Texture texture )
@@ -39,7 +39,7 @@ public abstract class Control extends Widget implements Listener
 	
 	public int getRenderWidth()
 	{
-		return width;
+		return this.width;
 	}
 	
 	public Widget setRenderWidth( int width )
@@ -50,7 +50,7 @@ public abstract class Control extends Widget implements Listener
 	
 	public int getRenderHeight()
 	{
-		return height;
+		return this.height;
 	}
 	
 	public Widget setRenderHeight( int height )

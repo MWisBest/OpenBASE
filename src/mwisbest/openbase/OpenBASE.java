@@ -121,35 +121,35 @@ public abstract class OpenBASE
 	private void start()
 	{
 		new SleepThreadHackery( "[OpenBASE] Sleep Thread Hackery" );
-		theThread = new Thread( "[OpenBASE] Main" )
+		this.theThread = new Thread( "[OpenBASE] Main" )
 			{
 				@Override
 				public void run()
 				{
-					running = true;
-					init();
+					OpenBASE.this.running = true;
+					OpenBASE.this.init();
 				}
 			};
-		theThread.start();
+		this.theThread.start();
 	}
 	
 	private void init()
 	{
 		try
 		{
-			Display.setDisplayMode( new DisplayMode( windowWidth, windowHeight ) );
-			Display.setTitle( windowTitle );
-			Display.setIcon( new ByteBuffer[] { UtilsGL.loadIcon( windowIcon16Loc ), UtilsGL.loadIcon( windowIcon32Loc ) } );
+			Display.setDisplayMode( new DisplayMode( this.windowWidth, this.windowHeight ) );
+			Display.setTitle( this.windowTitle );
+			Display.setIcon( new ByteBuffer[] { UtilsGL.loadIcon( this.windowIcon16Loc ), UtilsGL.loadIcon( this.windowIcon32Loc ) } );
 			Display.setFullscreen( false );
 			Display.create();
-			Display.setVSyncEnabled( windowVSync );
+			Display.setVSyncEnabled( this.windowVSync );
 			Keyboard.enableRepeatEvents( true );
 			AL.create();
 			CL.create();
 			GL11.glEnable( GL11.GL_TEXTURE_2D );
 			GL11.glDisable( GL11.GL_DEPTH_TEST );
 			GL11.glMatrixMode( GL11.GL_PROJECTION );
-			GL11.glLoadMatrix( FloatMatrix.glOrtho( 0, windowWidth, windowHeight, 0, 1, -1 ).asFloatBuffer() );
+			GL11.glLoadMatrix( FloatMatrix.glOrtho( 0, this.windowWidth, this.windowHeight, 0, 1, -1 ).asFloatBuffer() );
 		}
 		catch( LWJGLException e )
 		{
@@ -161,17 +161,17 @@ public abstract class OpenBASE
 			e.printStackTrace();
 		}
 		
-		loadResources();
-		mainLoop();
+		this.loadResources();
+		this.mainLoop();
 	}
 	
 	private void mainLoop()
 	{
-		while( running )
+		while( this.running )
 		{
-			render();
-			audio();
-			input();
+			this.render();
+			this.audio();
+			this.input();
 		}
 		Display.destroy();
 		CL.destroy();
@@ -180,22 +180,22 @@ public abstract class OpenBASE
 	
 	private void render()
 	{
-		Common.render( framerateLimit );
-		customRender();
+		Common.render( this.framerateLimit );
+		this.customRender();
 		Display.update();
-		if( Display.isCloseRequested() ) running = false;
+		if( Display.isCloseRequested() ) this.running = false;
 	}
 	
 	private void audio()
 	{
 		Common.audio();
-		customAudio();
+		this.customAudio();
 	}
 	
 	private void input()
 	{
 		Common.input();
-		customInput();
+		this.customInput();
 	}
 	
 	public abstract void loadResources();

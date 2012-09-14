@@ -35,7 +35,7 @@ public class ButtonClickEvent extends Event
 	
 	public Button getButton()
 	{
-		return button;
+		return this.button;
 	}
 	
 	@Override

@@ -19,14 +19,10 @@
  */
 package mwisbest.openbase.gui;
 
-
 /**
- * Basic Widget run-down:
- * Use the constructor to create the Widget with your Texture or Font. Then,
- * set its values with the methods in here.
+ * Basic Widget run-down: Use the constructor to create the Widget with your Texture or Font. Then, set its values with the methods in here.
  * 
- * Example:
- * "Widget myWidget = new Widget( texture ).setX( 10 ).setY( 20 )" etc.
+ * Example: "Widget myWidget = new Widget( texture ).setX( 10 ).setY( 20 )" etc.
  */
 public abstract class Widget
 {
@@ -38,7 +34,7 @@ public abstract class Widget
 	
 	public int getX()
 	{
-		return x;
+		return this.x;
 	}
 	
 	public Widget setX( int x )
@@ -49,7 +45,7 @@ public abstract class Widget
 	
 	public int getY()
 	{
-		return y;
+		return this.y;
 	}
 	
 	public Widget setY( int y )
@@ -67,7 +63,7 @@ public abstract class Widget
 	
 	public RenderPriority getRenderPriority()
 	{
-		return priority;
+		return this.priority;
 	}
 	
 	public Widget setRenderPriority( RenderPriority priority )
@@ -78,7 +74,7 @@ public abstract class Widget
 	
 	public boolean getVisible()
 	{
-		return visible;
+		return this.visible;
 	}
 	
 	public Widget setVisible( boolean visible )
@@ -89,7 +85,7 @@ public abstract class Widget
 	
 	public String getTooltip()
 	{
-		return tooltip;
+		return this.tooltip;
 	}
 	
 	public Widget setTooltip( String tooltip )
@@ -100,7 +96,7 @@ public abstract class Widget
 	
 	public WidgetType getWidgetType()
 	{
-		return type;
+		return this.type;
 	}
 	
 	public abstract void render();

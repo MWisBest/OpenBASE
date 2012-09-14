@@ -35,12 +35,12 @@ public class DoubleVector2 implements Serializable
 	
 	public double getX()
 	{
-		return x;
+		return this.x;
 	}
 	
 	public double getY()
 	{
-		return y;
+		return this.y;
 	}
 	
 	public DoubleVector2 add( DoubleVector2 vector )

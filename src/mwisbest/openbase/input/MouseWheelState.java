@@ -33,7 +33,7 @@ public enum MouseWheelState
 	
 	public boolean getState()
 	{
-		return state;
+		return this.state;
 	}
 	
 	public static MouseWheelState getWheelState( boolean state )

@@ -36,17 +36,17 @@ public class FloatVector3 implements Serializable
 	
 	public float getX()
 	{
-		return x;
+		return this.x;
 	}
 	
 	public float getY()
 	{
-		return y;
+		return this.y;
 	}
 	
 	public float getZ()
 	{
-		return z;
+		return this.z;
 	}
 	
 	public FloatVector3 add( FloatVector3 vector )

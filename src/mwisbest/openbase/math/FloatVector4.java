@@ -37,22 +37,22 @@ public class FloatVector4 implements Serializable
 	
 	public float getX()
 	{
-		return x;
+		return this.x;
 	}
 	
 	public float getY()
 	{
-		return y;
+		return this.y;
 	}
 	
 	public float getZ()
 	{
-		return z;
+		return this.z;
 	}
 	
 	public float getW()
 	{
-		return w;
+		return this.w;
 	}
 	
 	public FloatVector4 add( FloatVector4 vector )

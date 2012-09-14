@@ -17,7 +17,7 @@ public class CheckboxClickEvent extends Event
 	
 	public Checkbox getCheckbox()
 	{
-		return checkbox;
+		return this.checkbox;
 	}
 	
 	@Override

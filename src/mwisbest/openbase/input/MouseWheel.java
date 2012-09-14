@@ -23,9 +23,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * An enum for the mouse's scroll wheel, supporting tilt wheel
- * as well, as long as there is a way to support tilt wheel
- * in actual code...
+ * An enum for the mouse's scroll wheel, supporting tilt wheel as well, as long as there is a way to support tilt wheel in actual code...
  */
 @SuppressWarnings( "boxing" )
 public enum MouseWheel
@@ -41,12 +39,12 @@ public enum MouseWheel
 	
 	private MouseWheel( final int i )
 	{
-		wheelCode = i;
+		this.wheelCode = i;
 	}
 	
 	public int getWheelCode()
 	{
-		return wheelCode;
+		return this.wheelCode;
 	}
 	
 	public static MouseWheel getWheel( int wheel )

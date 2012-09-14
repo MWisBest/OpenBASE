@@ -27,12 +27,12 @@ public abstract class Event
 	
 	protected String getEventName()
 	{
-		return getClass().getSimpleName();
+		return this.getClass().getSimpleName();
 	}
 	
 	public boolean getHasBeenCalled()
 	{
-		return beenCalled;
+		return this.beenCalled;
 	}
 	
 	public void setHasBeenCalled( boolean beenCalled )
@@ -43,6 +43,6 @@ public abstract class Event
 	@Override
 	public String toString()
 	{
-		return getEventName() + " (" + getClass().getName() + ")";
+		return this.getEventName() + " (" + this.getClass().getName() + ")";
 	}
 }

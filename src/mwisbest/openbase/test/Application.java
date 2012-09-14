@@ -55,24 +55,22 @@ public class Application extends OpenBASE implements Listener
 		ResourceManager.addWidget( "testLabel", new Label( ResourceManager.getFont( "BNE24" ), "Hello!" ).setX( 200 ).setY( 200 ) );
 		ResourceManager.addTexture( "testButtonOff", ResourceLoader.loadTexture( "TestButtonOff.png" ) );
 		ResourceManager.addTexture( "testButtonOn", ResourceLoader.loadTexture( "TestButtonOn.png" ) );
-		ResourceManager.addWidget( "testButton",
-			new Button( ResourceManager.getTexture( "testButtonOff" ) )
+		ResourceManager.addWidget( "testButton", new Button( ResourceManager.getTexture( "testButtonOff" ) )
 			{
 				@Override
 				public void onButtonClick()
 				{
-					if( getTexture().equals( ResourceManager.getTexture( "testButtonOff" ) ) ) setTexture( ResourceManager.getTexture( "testButtonOn" ) );
-					else setTexture( ResourceManager.getTexture( "testButtonOff" ) );
+					if( this.getTexture().equals( ResourceManager.getTexture( "testButtonOff" ) ) ) this.setTexture( ResourceManager.getTexture( "testButtonOn" ) );
+					else this.setTexture( ResourceManager.getTexture( "testButtonOff" ) );
 				}
 			} );
-		ResourceManager.addWidget( "testCheckbox",
-			new Checkbox( ResourceManager.getTexture( "testButtonOff" ) )
+		ResourceManager.addWidget( "testCheckbox", new Checkbox( ResourceManager.getTexture( "testButtonOff" ) )
 			{
 				@Override
 				public void onStateChanged( boolean state )
 				{
-					if( state ) setTexture( ResourceManager.getTexture( "testButtonOn" ) );
-					else setTexture( ResourceManager.getTexture( "testButtonOff" ) );
+					if( state ) this.setTexture( ResourceManager.getTexture( "testButtonOn" ) );
+					else this.setTexture( ResourceManager.getTexture( "testButtonOff" ) );
 				}
 			}.setPosition( 384, 128 ) );
 		EventManager.registerEvents( this, this );
@@ -96,11 +94,8 @@ public class Application extends OpenBASE implements Listener
 	@EventHandler( EventPriority.MONITOR )
 	public void handleKeyboardEvent( KeyboardEvent event )
 	{
-		if( !event.getRepeatEvent() )
-		{
-			if( event.getState() == KeyboardKeyState.PRESSED && event.getKey() != KeyboardKey.KEY_UNKNOWN ) System.out.println( "Key pressed!" );
-			else if( event.getState() == KeyboardKeyState.RELEASED && event.getKey() != KeyboardKey.KEY_UNKNOWN ) System.out.println( "Key released!" );
-		}
+		if( !event.getRepeatEvent() ) if( event.getState() == KeyboardKeyState.PRESSED && event.getKey() != KeyboardKey.KEY_UNKNOWN ) System.out.println( "Key pressed!" );
+		else if( event.getState() == KeyboardKeyState.RELEASED && event.getKey() != KeyboardKey.KEY_UNKNOWN ) System.out.println( "Key released!" );
 	}
 	
 	@EventHandler( EventPriority.MONITOR )

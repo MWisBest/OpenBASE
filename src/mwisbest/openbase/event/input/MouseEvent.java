@@ -42,27 +42,27 @@ public class MouseEvent extends Event
 	
 	public MouseButton getButton()
 	{
-		return button;
+		return this.button;
 	}
 	
 	public MouseButtonState getState()
 	{
-		return state;
+		return this.state;
 	}
 	
 	public int getX()
 	{
-		return x;
+		return this.x;
 	}
 	
 	public int getY()
 	{
-		return y;
+		return this.y;
 	}
 	
 	public int getZ()
 	{
-		return z;
+		return this.z;
 	}
 	
 	@Override

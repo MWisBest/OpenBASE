@@ -20,8 +20,7 @@
 package mwisbest.openbase.event;
 
 /**
- * A blank interface that classes registering events with
- * the EventHandler annotation need to implement.
+ * A blank interface that classes registering events with the EventHandler annotation need to implement.
  */
 public interface Listener
 {

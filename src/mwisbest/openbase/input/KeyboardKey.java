@@ -165,7 +165,7 @@ public enum KeyboardKey
 	
 	public int getKeyCode()
 	{
-		return keyCode;
+		return this.keyCode;
 	}
 	
 	public static KeyboardKey getKey( int key )

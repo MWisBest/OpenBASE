@@ -127,15 +127,15 @@ public abstract class OpenBASEApplet extends Applet
 	private void startLWJGL()
 	{
 		new SleepThreadHackery( "[OpenBASE] Sleep Thread Hackery" );
-		theThread = new Thread( "[OpenBASE] Main" )
+		this.theThread = new Thread( "[OpenBASE] Main" )
 			{
 				@Override
 				public void run()
 				{
-					running = true;
+					OpenBASEApplet.this.running = true;
 					try
 					{
-						Display.setParent( displayParent );
+						Display.setParent( OpenBASEApplet.this.displayParent );
 						Display.create();
 						Keyboard.enableRepeatEvents( true );
 						AL.create();
@@ -143,7 +143,7 @@ public abstract class OpenBASEApplet extends Applet
 						GL11.glEnable( GL11.GL_TEXTURE_2D );
 						GL11.glDisable( GL11.GL_DEPTH_TEST );
 						GL11.glMatrixMode( GL11.GL_PROJECTION );
-						GL11.glLoadMatrix( FloatMatrix.glOrtho( 0, canvasWidth, canvasHeight, 0, 1, -1 ).asFloatBuffer() );
+						GL11.glLoadMatrix( FloatMatrix.glOrtho( 0, OpenBASEApplet.this.canvasWidth, OpenBASEApplet.this.canvasHeight, 0, 1, -1 ).asFloatBuffer() );
 					}
 					catch( LWJGLException e )
 					{
@@ -151,19 +151,19 @@ public abstract class OpenBASEApplet extends Applet
 						System.exit( 0 );
 					}
 					
-					loadResources();
-					mainLoop();
+					OpenBASEApplet.this.loadResources();
+					OpenBASEApplet.this.mainLoop();
 				}
 			};
-		theThread.start();
+		this.theThread.start();
 	}
 	
 	private void stopLWJGL()
 	{
-		running = false;
+		this.running = false;
 		try
 		{
-			theThread.join();
+			this.theThread.join();
 		}
 		catch( InterruptedException e )
 		{
@@ -184,17 +184,17 @@ public abstract class OpenBASEApplet extends Applet
 	@Override
 	public void destroy()
 	{
-		remove( displayParent );
+		this.remove( this.displayParent );
 		super.destroy();
 	}
 	
 	@Override
 	public void init()
 	{
-		setLayout( new BorderLayout() );
+		this.setLayout( new BorderLayout() );
 		try
 		{
-			displayParent = new Canvas()
+			this.displayParent = new Canvas()
 				{
 					private static final long serialVersionUID = 2601628115991718459L;
 					
@@ -202,22 +202,22 @@ public abstract class OpenBASEApplet extends Applet
 					public final void addNotify()
 					{
 						super.addNotify();
-						startLWJGL();
+						OpenBASEApplet.this.startLWJGL();
 					}
 					
 					@Override
 					public final void removeNotify()
 					{
-						stopLWJGL();
+						OpenBASEApplet.this.stopLWJGL();
 						super.removeNotify();
 					}
 				};
-			displayParent.setSize( canvasWidth, canvasHeight );
-			add( displayParent );
-			displayParent.setFocusable( true );
-			displayParent.requestFocus();
-			displayParent.setIgnoreRepaint( true );
-			setVisible( true );
+			this.displayParent.setSize( this.canvasWidth, this.canvasHeight );
+			this.add( this.displayParent );
+			this.displayParent.setFocusable( true );
+			this.displayParent.requestFocus();
+			this.displayParent.setIgnoreRepaint( true );
+			this.setVisible( true );
 		}
 		catch( Exception e )
 		{
@@ -228,11 +228,11 @@ public abstract class OpenBASEApplet extends Applet
 	
 	private void mainLoop()
 	{
-		while( running )
+		while( this.running )
 		{
-			render();
-			audio();
-			input();
+			this.render();
+			this.audio();
+			this.input();
 		}
 		Display.destroy();
 		CL.destroy();
@@ -241,22 +241,22 @@ public abstract class OpenBASEApplet extends Applet
 	
 	private void render()
 	{
-		Common.render( framerateLimit );
-		customRender();
+		Common.render( this.framerateLimit );
+		this.customRender();
 		Display.update();
-		if( Display.isCloseRequested() ) running = false;
+		if( Display.isCloseRequested() ) this.running = false;
 	}
 	
 	private void audio()
 	{
 		Common.audio();
-		customAudio();
+		this.customAudio();
 	}
 	
 	private void input()
 	{
 		Common.input();
-		customInput();
+		this.customInput();
 	}
 	
 	public abstract void loadResources();

@@ -36,17 +36,17 @@ public class DoubleVector3 implements Serializable
 	
 	public double getX()
 	{
-		return x;
+		return this.x;
 	}
 	
 	public double getY()
 	{
-		return y;
+		return this.y;
 	}
 	
 	public double getZ()
 	{
-		return z;
+		return this.z;
 	}
 	
 	public DoubleVector3 add( DoubleVector3 vector )

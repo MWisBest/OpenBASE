@@ -37,22 +37,22 @@ public class DoubleVector4 implements Serializable
 	
 	public double getX()
 	{
-		return x;
+		return this.x;
 	}
 	
 	public double getY()
 	{
-		return y;
+		return this.y;
 	}
 	
 	public double getZ()
 	{
-		return z;
+		return this.z;
 	}
 	
 	public double getW()
 	{
-		return w;
+		return this.w;
 	}
 	
 	public DoubleVector4 add( DoubleVector4 vector )

@@ -22,13 +22,11 @@ package mwisbest.openbase.event;
 public enum EventPriority
 {
 	/**
-	 * Event is of lowest priority, and will let all other events
-	 * modify the event as they see fit.
+	 * Event is of lowest priority, and will let all other events modify the event as they see fit.
 	 */
 	LOWEST( 0 ),
 	/**
-	 * Event is of low priority and can be freely modified by most
-	 * other events.
+	 * Event is of low priority and can be freely modified by most other events.
 	 */
 	LOW( 1 ),
 	/**
@@ -36,13 +34,11 @@ public enum EventPriority
 	 */
 	NORMAL( 2 ),
 	/**
-	 * Event is of high priority, but still allowing events with
-	 * HIGHEST priority to affect the outcome of the event.
+	 * Event is of high priority, but still allowing events with HIGHEST priority to affect the outcome of the event.
 	 */
 	HIGH( 3 ),
 	/**
-	 * Event is of highest priority, needing to have the final
-	 * say in the outcome of the event.
+	 * Event is of highest priority, needing to have the final say in the outcome of the event.
 	 */
 	HIGHEST( 4 ),
 	/**
@@ -61,6 +57,6 @@ public enum EventPriority
 	
 	public int getID()
 	{
-		return id;
+		return this.id;
 	}
 }

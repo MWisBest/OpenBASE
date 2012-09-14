@@ -29,21 +29,20 @@ public class FloatMatrix
 	public int size;
 	
 	/**
-	 * Creates a new FloatMatrix of the specified size,
-	 * initialized to the identify matrix.
+	 * Creates a new FloatMatrix of the specified size, initialized to the identify matrix.
 	 * 
 	 * @param size
 	 */
 	public FloatMatrix( int size )
 	{
 		this.size = size;
-		data = new float[size * size];
-		setIdentity();
+		this.data = new float[size * size];
+		this.setIdentity();
 	}
 	
 	public int getSize()
 	{
-		return size;
+		return this.size;
 	}
 	
 	public FloatMatrix setIdentity()
@@ -61,7 +60,6 @@ public class FloatMatrix
 				else matrix.data[index( x, y, matrix.size )] = 0.0F;
 			}
 		}
-		
 		return matrix;
 	}
 	
@@ -74,10 +72,7 @@ public class FloatMatrix
 	{
 		for( int x = 0; x < matrix.size; x++ )
 		{
-			for( int y = 0; y < matrix.size; y++ )
-			{
-				matrix.data[index( x, y, matrix.size )] = 0.0F;
-			}
+			for( int y = 0; y < matrix.size; y++ ) matrix.data[index( x, y, matrix.size )] = 0.0F;
 		}
 		
 		return matrix;
@@ -90,10 +85,7 @@ public class FloatMatrix
 		
 		for( int x = 0; x < dest.size; x++ )
 		{
-			for( int y = 0; y < dest.size; y++ )
-			{
-				dest.data[index( x, y, dest.size )] = left.data[index( x, y, dest.size )] + right.data[index( x, y, dest.size )];
-			}
+			for( int y = 0; y < dest.size; y++ ) dest.data[index( x, y, dest.size )] = left.data[index( x, y, dest.size )] + right.data[index( x, y, dest.size )];
 		}
 		
 		return dest;
@@ -106,10 +98,7 @@ public class FloatMatrix
 		
 		for( int x = 0; x < dest.size; x++ )
 		{
-			for( int y = 0; y < dest.size; y++ )
-			{
-				dest.data[index( x, y, dest.size )] = left.data[index( x, y, dest.size )] - right.data[index( x, y, dest.size )];
-			}
+			for( int y = 0; y < dest.size; y++ ) dest.data[index( x, y, dest.size )] = left.data[index( x, y, dest.size )] - right.data[index( x, y, dest.size )];
 		}
 		
 		return dest;
@@ -129,10 +118,10 @@ public class FloatMatrix
 				{
 					float r = left.get( i, k ) * right.get( k, j );
 					dest.set( i, j, dest.get( i, j ) + r );
-
 				}
 			}
 		}
+		
 		return dest;
 	}
 	
@@ -147,10 +136,7 @@ public class FloatMatrix
 		
 		for( int i = 0; i < matrix.size; i++ )
 		{
-			for( int j = 0; j < matrix.size; j++ )
-			{
-				fb.put( matrix.data[index( i, j, matrix.size )] );
-			}
+			for( int j = 0; j < matrix.size; j++ ) fb.put( matrix.data[index( i, j, matrix.size )] );
 		}
 		
 		fb.flip();
@@ -166,9 +152,9 @@ public class FloatMatrix
 		orthoMatrix.set( 1, 1, 2.0F / ( top - bottom ) );
 		orthoMatrix.set( 2, 2, -2.0F / ( far - near ) );
 		orthoMatrix.set( 3, 3, 1.0F );
-		orthoMatrix.set( 3, 0, ( -( right + left ) / ( right - left ) ) );
-		orthoMatrix.set( 3, 1, ( -( top + bottom ) / ( top - bottom ) ) );
-		orthoMatrix.set( 3, 2, ( -( far + near ) / ( far - near ) ) );
+		orthoMatrix.set( 3, 0, -( right + left ) / ( right - left ) );
+		orthoMatrix.set( 3, 1, -( top + bottom ) / ( top - bottom ) );
+		orthoMatrix.set( 3, 2, -( far + near ) / ( far - near ) );
 		
 		return orthoMatrix;
 	}
@@ -180,16 +166,16 @@ public class FloatMatrix
 	
 	public float get( int row, int column )
 	{
-		if( row < 0 || row >= size ) throw new IllegalArgumentException( "Row must be between 0 and " + ( size - 1 ) + "." );
-		if( column < 0 || column >= size ) throw new IllegalArgumentException( "Column must be between 0 and " + ( size - 1 ) + "." );
-		return data[index( row, column, size )];
+		if( row < 0 || row >= this.size ) throw new IllegalArgumentException( "Row must be between 0 and " + ( this.size - 1 ) + "." );
+		if( column < 0 || column >= this.size ) throw new IllegalArgumentException( "Column must be between 0 and " + ( this.size - 1 ) + "." );
+		return this.data[index( row, column, this.size )];
 	}
 	
 	public void set( int row, int column, float value )
 	{
-		if( row < 0 || row >= size ) throw new IllegalArgumentException( "Row must be between 0 and " + ( size - 1 ) + "." );
-		if( column < 0 || column >= size ) throw new IllegalArgumentException( "Column must be between 0 and " + ( size - 1 ) + "." );
-		data[index( row, column, size )] = value;
+		if( row < 0 || row >= this.size ) throw new IllegalArgumentException( "Row must be between 0 and " + ( this.size - 1 ) + "." );
+		if( column < 0 || column >= this.size ) throw new IllegalArgumentException( "Column must be between 0 and " + ( this.size - 1 ) + "." );
+		this.data[index( row, column, this.size )] = value;
 	}
 	
 	public static float[] toArray( FloatMatrix matrix )

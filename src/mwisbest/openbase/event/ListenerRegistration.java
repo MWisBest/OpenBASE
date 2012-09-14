@@ -34,16 +34,16 @@ public class ListenerRegistration
 	
 	public EventExecutor getExecutor()
 	{
-		return executor;
+		return this.executor;
 	}
 	
 	public EventPriority getPriority()
 	{
-		return priority;
+		return this.priority;
 	}
 	
 	public Object getOwner()
 	{
-		return owner;
+		return this.owner;
 	}
 }

@@ -48,15 +48,12 @@ import org.newdawn.slick.openal.SoundStore;
 /**
  * Common code that OpenBASE and OpenBASEApplet share.
  * 
- * This was put in a separate class to make it easier to
- * manage both Application and Applet code.
+ * This was put in a separate class to make it easier to manage both Application and Applet code.
  */
 public class Common
 {
 	/**
-	 * Common code for rendering the Widgets to the screen.
-	 * After this, customRender() is used from OpenBASE or
-	 * OpenBASEApplet (whatever is calling this method).
+	 * Common code for rendering the Widgets to the screen. After this, customRender() is used from OpenBASE or OpenBASEApplet (whatever is calling this method).
 	 */
 	protected static void render( int framerateLimit )
 	{
@@ -75,9 +72,7 @@ public class Common
 	}
 	
 	/**
-	 * Common code for the audio system.
-	 * After this, customAudio() is used from OpenBASE or
-	 * OpenBASEApplet (whatever is calling this method).
+	 * Common code for the audio system. After this, customAudio() is used from OpenBASE or OpenBASEApplet (whatever is calling this method).
 	 */
 	protected static void audio()
 	{
@@ -85,9 +80,7 @@ public class Common
 	}
 	
 	/**
-	 * Common code for input. This notifies Mouse and Keyboard events.
-	 * After this, customInput() is used from OpenBASE or
-	 * OpenBASEApplet (whatever is calling this method).
+	 * Common code for input. This notifies Mouse and Keyboard events. After this, customInput() is used from OpenBASE or OpenBASEApplet (whatever is calling this method).
 	 */
 	protected static void input()
 	{

@@ -61,7 +61,7 @@ public enum MouseButton
 	
 	public int getButtonCode()
 	{
-		return buttonCode;
+		return this.buttonCode;
 	}
 	
 	public static MouseButton getButton( int button )

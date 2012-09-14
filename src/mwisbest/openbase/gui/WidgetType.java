@@ -26,7 +26,7 @@ public enum WidgetType
 	 */
 	BUTTON,
 	/**
-	 * CheckBoxes are 
+	 * CheckBoxes are
 	 */
 	CHECKBOX,
 	/**

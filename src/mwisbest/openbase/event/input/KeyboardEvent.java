@@ -40,17 +40,17 @@ public class KeyboardEvent extends Event
 	
 	public KeyboardKey getKey()
 	{
-		return key;
+		return this.key;
 	}
 	
 	public KeyboardKeyState getState()
 	{
-		return state;
+		return this.state;
 	}
 	
 	public boolean getRepeatEvent()
 	{
-		return repeatEvent;
+		return this.repeatEvent;
 	}
 	
 	@Override

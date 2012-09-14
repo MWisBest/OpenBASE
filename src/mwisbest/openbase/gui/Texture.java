@@ -43,7 +43,7 @@ public class Texture extends Widget
 	
 	public org.newdawn.slick.opengl.Texture getTexture()
 	{
-		return texture;
+		return this.texture;
 	}
 	
 	public Widget setTexture( org.newdawn.slick.opengl.Texture texture )
@@ -54,7 +54,7 @@ public class Texture extends Widget
 	
 	public int getRenderWidth()
 	{
-		return width;
+		return this.width;
 	}
 	
 	public Widget setRenderWidth( int width )
@@ -65,7 +65,7 @@ public class Texture extends Widget
 	
 	public int getRenderHeight()
 	{
-		return height;
+		return this.height;
 	}
 	
 	public Widget setRenderHeight( int height )
@@ -82,7 +82,7 @@ public class Texture extends Widget
 		GL11.glBlendFunc( GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA );
 		GL11.glDepthMask( false );
 		GL11.glColor4f( 1.0F, 1.0F, 1.0F, 1.0F );
-		GL11.glBindTexture( GL11.GL_TEXTURE_2D, texture.getTextureID() );
+		GL11.glBindTexture( GL11.GL_TEXTURE_2D, this.texture.getTextureID() );
 		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST );
 		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST );
 		// Mipmap start
@@ -94,16 +94,16 @@ public class Texture extends Widget
 		else if( capabilities.GL_ARB_framebuffer_object ) ARBFramebufferObject.glGenerateMipmap( GL11.GL_TEXTURE_2D );
 		else if( capabilities.OpenGL14 ) GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL14.GL_GENERATE_MIPMAP, GL11.GL_TRUE );
 		// Mipmap end
-		GL11.glTranslatef( x, y, 0 );
+		GL11.glTranslatef( this.x, this.y, 0 );
 		GL11.glBegin( GL11.GL_QUADS );
 		GL11.glTexCoord2f( 0, 0 );
 		GL11.glVertex2f( 0, 0 );
-		GL11.glTexCoord2f( 0, texture.getHeight() );
-		GL11.glVertex2f( 0, height );
-		GL11.glTexCoord2f( texture.getWidth(), texture.getHeight() );
-		GL11.glVertex2f( width, height );
-		GL11.glTexCoord2f( texture.getWidth(), 0 );
-		GL11.glVertex2f( width, 0 );
+		GL11.glTexCoord2f( 0, this.texture.getHeight() );
+		GL11.glVertex2f( 0, this.height );
+		GL11.glTexCoord2f( this.texture.getWidth(), this.texture.getHeight() );
+		GL11.glVertex2f( this.width, this.height );
+		GL11.glTexCoord2f( this.texture.getWidth(), 0 );
+		GL11.glVertex2f( this.width, 0 );
 		GL11.glEnd();
 		GL11.glPopMatrix();
 	}

@@ -53,6 +53,6 @@ public enum RenderPriority
 	
 	public int getID()
 	{
-		return id;
+		return this.id;
 	}
 }

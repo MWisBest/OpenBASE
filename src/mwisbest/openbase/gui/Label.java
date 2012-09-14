@@ -46,33 +46,33 @@ public class Label extends Widget
 	
 	public Font getFont()
 	{
-		return font;
+		return this.font;
 	}
 	
 	public Widget setFont( Font font )
 	{
 		this.font = font;
-		this.width = font.getWidth( text );
-		this.height = font.getHeight( text );
+		this.width = font.getWidth( this.text );
+		this.height = font.getHeight( this.text );
 		return this;
 	}
 	
 	public String getText()
 	{
-		return text;
+		return this.text;
 	}
 	
 	public Widget setText( String text )
 	{
 		this.text = text;
-		this.width = font.getWidth( text );
-		this.height = font.getHeight( text );
+		this.width = this.font.getWidth( text );
+		this.height = this.font.getHeight( text );
 		return this;
 	}
 	
 	public Color getColor()
 	{
-		return color;
+		return this.color;
 	}
 	
 	public Widget setColor( Color color )
@@ -84,6 +84,6 @@ public class Label extends Widget
 	@Override
 	public void render()
 	{
-		font.drawString( x, y, text, color );
+		this.font.drawString( this.x, this.y, this.text, this.color );
 	}
 }

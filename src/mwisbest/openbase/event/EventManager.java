@@ -137,8 +137,7 @@ public class EventManager
 				eventSet = new HashSet<>();
 				ret.put( eventClass, eventSet );
 			}
-			eventSet.add( new ListenerRegistration(
-				new EventExecutor()
+			eventSet.add( new ListenerRegistration( new EventExecutor()
 				{
 					@Override
 					public void execute( Event event ) throws EventException

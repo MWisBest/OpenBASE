@@ -33,7 +33,7 @@ public enum KeyboardKeyState
 	
 	public boolean getState()
 	{
-		return state;
+		return this.state;
 	}
 	
 	public static KeyboardKeyState getKeyState( boolean state )
