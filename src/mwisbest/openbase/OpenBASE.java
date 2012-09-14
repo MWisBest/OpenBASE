@@ -37,51 +37,76 @@ import org.lwjgl.opengl.GL11;
 public abstract class OpenBASE
 {
 	private Thread theThread = null;
-	private int windowWidth = 640, windowHeight = 360;
+	private int windowWidth = 640, windowHeight = 360, framerateLimit = -1;
 	private String windowTitle = "OpenBASE", windowIcon16Loc = "GLicon16.png", windowIcon32Loc = "GLicon32.png";
 	private boolean windowVSync = false, running = false;
 	
 	public OpenBASE()
 	{
-		this( 640, 360, "OpenBASE", "GLicon16.png", "GLicon32.png", false );
+		this( 640, 360, "OpenBASE", "GLicon16.png", "GLicon32.png", false, -1 );
 	}
 	
 	public OpenBASE( int width, int height )
 	{
-		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", false );
+		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", false, -1 );
+	}
+	
+	public OpenBASE( int width, int height, int framerateLimit )
+	{
+		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", false, framerateLimit );
 	}
 	
 	public OpenBASE( int width, int height, boolean vSync )
 	{
-		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", vSync );
+		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", vSync, -1 );
 	}
 	
 	public OpenBASE( int width, int height, String title )
 	{
-		this( width, height, title, "GLicon16.png", "GLicon32.png", false );
+		this( width, height, title, "GLicon16.png", "GLicon32.png", false, -1 );
+	}
+	
+	public OpenBASE( int width, int height, String title, int framerateLimit )
+	{
+		this( width, height, title, "GLicon16.png", "GLicon32.png", false, framerateLimit );
 	}
 	
 	public OpenBASE( int width, int height, String title, boolean vSync )
 	{
-		this( width, height, title, "GLicon16.png", "GLicon32.png", vSync );
+		this( width, height, title, "GLicon16.png", "GLicon32.png", vSync, -1 );
 	}
 	
 	public OpenBASE( int width, int height, String icon16Loc, String icon32Loc )
 	{
-		this( width, height, "OpenBASE", icon16Loc, icon32Loc, false );
+		this( width, height, "OpenBASE", icon16Loc, icon32Loc, false, -1 );
+	}
+	
+	public OpenBASE( int width, int height, String icon16Loc, String icon32Loc, int framerateLimit )
+	{
+		this( width, height, "OpenBASE", icon16Loc, icon32Loc, false, framerateLimit );
 	}
 	
 	public OpenBASE( int width, int height, String icon16Loc, String icon32Loc, boolean vSync )
 	{
-		this( width, height, "OpenBASE", icon16Loc, icon32Loc, vSync );
+		this( width, height, "OpenBASE", icon16Loc, icon32Loc, vSync, -1 );
 	}
 	
 	public OpenBASE( int width, int height, String title, String icon16Loc, String icon32Loc )
 	{
-		this( width, height, title, icon16Loc, icon32Loc, false );
+		this( width, height, title, icon16Loc, icon32Loc, false, -1 );
+	}
+	
+	public OpenBASE( int width, int height, String title, String icon16Loc, String icon32Loc, int framerateLimit )
+	{
+		this( width, height, title, icon16Loc, icon32Loc, false, framerateLimit );
 	}
 	
 	public OpenBASE( int width, int height, String title, String icon16Loc, String icon32Loc, boolean vSync )
+	{
+		this( width, height, title, icon16Loc, icon32Loc, vSync, -1 );
+	}
+	
+	private OpenBASE( int width, int height, String title, String icon16Loc, String icon32Loc, boolean vSync, int framerateLimit )
 	{
 		this.windowWidth = width;
 		this.windowHeight = height;
@@ -89,6 +114,7 @@ public abstract class OpenBASE
 		this.windowIcon16Loc = icon16Loc;
 		this.windowIcon32Loc = icon32Loc;
 		this.windowVSync = vSync;
+		this.framerateLimit = framerateLimit;
 		this.start();
 	}
 	
@@ -154,7 +180,7 @@ public abstract class OpenBASE
 	
 	private void render()
 	{
-		Common.render();
+		Common.render( framerateLimit );
 		customRender();
 		Display.update();
 		if( Display.isCloseRequested() ) running = false;

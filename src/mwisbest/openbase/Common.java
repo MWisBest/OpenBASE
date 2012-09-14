@@ -58,7 +58,7 @@ public class Common
 	 * After this, customRender() is used from OpenBASE or
 	 * OpenBASEApplet (whatever is calling this method).
 	 */
-	protected static void render()
+	protected static void render( int framerateLimit )
 	{
 		GL11.glClear( GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT );
 		GL11.glMatrixMode( GL11.GL_MODELVIEW );
@@ -71,6 +71,7 @@ public class Common
 				if( widget.getValue().getRenderPriority() == priority && widget.getValue().getVisible() ) widget.getValue().render();
 			}
 		}
+		if( framerateLimit > 0 ) Display.sync( framerateLimit );
 	}
 	
 	/**

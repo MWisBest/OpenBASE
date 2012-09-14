@@ -54,7 +54,7 @@ public class UtilsGL
 		}
 	}
 	
-	public static void takeScreenshot()
+	public static void takeScreenshot( String filename )
 	{
 		GL11.glReadBuffer( GL11.GL_FRONT );
 		int width = Display.getDisplayMode().getWidth();
@@ -62,8 +62,7 @@ public class UtilsGL
 		int bpp = 4;
 		ByteBuffer buffer = BufferUtils.createByteBuffer( width * height * bpp );
 		GL11.glReadPixels( 0, 0, width, height, GL11.GL_RGBA, GL11.GL_UNSIGNED_BYTE, buffer );
-		File file = new File( "Screenshot.png" );
-		String format = "PNG";
+		File file = new File( filename );
 		BufferedImage image = new BufferedImage( width, height, BufferedImage.TYPE_INT_RGB );
 		
 		for( int x = 0; x < width; x++ )
@@ -78,7 +77,7 @@ public class UtilsGL
 		
 		try
 		{
-			ImageIO.write( image, format, file );
+			ImageIO.write( image, "PNG", file );
 		}
 		catch( IOException e )
 		{
@@ -97,7 +96,6 @@ public class UtilsGL
 	 */
 	public static void drawTexture( Texture texture, int x, int y, int width, int height )
 	{
-		GL11.glTranslatef( x, y, 0 );
 		GL11.glPushMatrix();
 		GL11.glEnable( GL11.GL_BLEND );
 		GL11.glBlendFunc( GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA );
@@ -114,6 +112,7 @@ public class UtilsGL
 		else if( capabilities.GL_EXT_framebuffer_object ) EXTFramebufferObject.glGenerateMipmapEXT( GL11.GL_TEXTURE_2D );
 		else if( capabilities.OpenGL14 ) GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL14.GL_GENERATE_MIPMAP, GL11.GL_TRUE );
 		// Mipmap end
+		GL11.glTranslatef( x, y, 0 );
 		GL11.glBegin( GL11.GL_QUADS );
 		GL11.glTexCoord2f( 0, 0 );
 		GL11.glVertex2f( 0, 0 );

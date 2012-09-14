@@ -36,7 +36,7 @@ import org.lwjgl.opengl.GL11;
 public abstract class OpenBASEApplet extends Applet
 {
 	private static final long serialVersionUID = -3837899243800598866L;
-	private int canvasWidth = 640, canvasHeight = 360;
+	private int canvasWidth = 640, canvasHeight = 360, framerateLimit = -1;
 	@SuppressWarnings( "unused" )
 	private String canvasTitle = "OpenBASE";
 	@SuppressWarnings( "unused" )
@@ -50,45 +50,70 @@ public abstract class OpenBASEApplet extends Applet
 	
 	public OpenBASEApplet()
 	{
-		this( 640, 360, "OpenBASE", "GLicon16.png", "GLicon32.png", false );
+		this( 640, 360, "OpenBASE", "GLicon16.png", "GLicon32.png", false, -1 );
 	}
 	
 	public OpenBASEApplet( int width, int height )
 	{
-		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", false );
+		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", false, -1 );
+	}
+	
+	public OpenBASEApplet( int width, int height, int framerateLimit )
+	{
+		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", false, framerateLimit );
 	}
 	
 	public OpenBASEApplet( int width, int height, boolean vSync )
 	{
-		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", vSync );
+		this( width, height, "OpenBASE", "GLicon16.png", "GLicon32.png", vSync, -1 );
 	}
 	
 	public OpenBASEApplet( int width, int height, String title )
 	{
-		this( width, height, title, "GLicon16.png", "GLicon32.png", false );
+		this( width, height, title, "GLicon16.png", "GLicon32.png", false, -1 );
+	}
+	
+	public OpenBASEApplet( int width, int height, String title, int framerateLimit )
+	{
+		this( width, height, title, "GLicon16.png", "GLicon32.png", false, framerateLimit );
 	}
 	
 	public OpenBASEApplet( int width, int height, String title, boolean vSync )
 	{
-		this( width, height, title, "GLicon16.png", "GLicon32.png", vSync );
+		this( width, height, title, "GLicon16.png", "GLicon32.png", vSync, -1 );
 	}
 	
 	public OpenBASEApplet( int width, int height, String icon16Loc, String icon32Loc )
 	{
-		this( width, height, "OpenBASE", icon16Loc, icon32Loc, false );
+		this( width, height, "OpenBASE", icon16Loc, icon32Loc, false, -1 );
+	}
+	
+	public OpenBASEApplet( int width, int height, String icon16Loc, String icon32Loc, int framerateLimit )
+	{
+		this( width, height, "OpenBASE", icon16Loc, icon32Loc, false, framerateLimit );
 	}
 	
 	public OpenBASEApplet( int width, int height, String icon16Loc, String icon32Loc, boolean vSync )
 	{
-		this( width, height, "OpenBASE", icon16Loc, icon32Loc, vSync );
+		this( width, height, "OpenBASE", icon16Loc, icon32Loc, vSync, -1 );
 	}
 	
 	public OpenBASEApplet( int width, int height, String title, String icon16Loc, String icon32Loc )
 	{
-		this( width, height, title, icon16Loc, icon32Loc, false );
+		this( width, height, title, icon16Loc, icon32Loc, false, -1 );
+	}
+	
+	public OpenBASEApplet( int width, int height, String title, String icon16Loc, String icon32Loc, int framerateLimit )
+	{
+		this( width, height, title, icon16Loc, icon32Loc, false, framerateLimit );
 	}
 	
 	public OpenBASEApplet( int width, int height, String title, String icon16Loc, String icon32Loc, boolean vSync )
+	{
+		this( width, height, title, icon16Loc, icon32Loc, vSync, -1 );
+	}
+	
+	public OpenBASEApplet( int width, int height, String title, String icon16Loc, String icon32Loc, boolean vSync, int framerateLimit )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
@@ -96,6 +121,7 @@ public abstract class OpenBASEApplet extends Applet
 		this.canvasIcon16Loc = icon16Loc;
 		this.canvasIcon32Loc = icon32Loc;
 		this.canvasVSync = vSync;
+		this.framerateLimit = framerateLimit;
 	}
 	
 	private void startLWJGL()
@@ -215,7 +241,7 @@ public abstract class OpenBASEApplet extends Applet
 	
 	private void render()
 	{
-		Common.render();
+		Common.render( framerateLimit );
 		customRender();
 		Display.update();
 		if( Display.isCloseRequested() ) running = false;
