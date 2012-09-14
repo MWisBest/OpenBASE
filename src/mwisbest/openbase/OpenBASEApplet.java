@@ -136,6 +136,7 @@ public abstract class OpenBASEApplet extends Applet
 					OpenBASEApplet.this.running = true;
 					try
 					{
+						System.setProperty( "org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true" );
 						Display.setParent( OpenBASEApplet.this.displayParent );
 						Display.create();
 						Keyboard.enableRepeatEvents( true );

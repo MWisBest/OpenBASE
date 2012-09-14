@@ -138,6 +138,7 @@ public abstract class OpenBASE
 	{
 		try
 		{
+			System.setProperty( "org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true" );
 			Display.setDisplayMode( new DisplayMode( this.windowWidth, this.windowHeight ) );
 			Display.setTitle( this.windowTitle );
 			Display.setIcon( new ByteBuffer[] { UtilsGL.loadIcon( this.windowIcon16Loc ), UtilsGL.loadIcon( this.windowIcon32Loc ) } );
