@@ -22,6 +22,7 @@ package mwisbest.openbase;
 import java.applet.Applet;
 import java.awt.BorderLayout;
 import java.awt.Canvas;
+import java.io.File;
 
 import mwisbest.mwtils.thread.SleepThreadHackery;
 import mwisbest.openbase.math.FloatMatrix;
@@ -48,6 +49,7 @@ public abstract class OpenBASEApplet extends Applet
 	private boolean canvasVSync = false, running = false;
 	private Canvas displayParent = null;
 	private Thread theThread = null;
+	private File dataFolder = new File( ".", ".openbase" );
 	
 	public OpenBASEApplet()
 	{
@@ -134,6 +136,7 @@ public abstract class OpenBASEApplet extends Applet
 				public void run()
 				{
 					OpenBASEApplet.this.running = true;
+					Common.extractNatives( new File( OpenBASEApplet.this.dataFolder, "natives" ), false );
 					try
 					{
 						System.setProperty( "org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true" );

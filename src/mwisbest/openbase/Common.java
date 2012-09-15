@@ -19,8 +19,16 @@
  */
 package mwisbest.openbase;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.security.CodeSource;
+import java.util.Enumeration;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.jar.JarEntry;
+import java.util.jar.JarFile;
 
 import mwisbest.openbase.event.Event;
 import mwisbest.openbase.event.EventManager;
@@ -117,6 +125,84 @@ public class Common
 		{
 			Event keyboardEvent = new KeyboardEvent( KeyboardKey.getKey( Keyboard.getEventKey() ), KeyboardKeyState.getKeyState( Keyboard.getEventKeyState() ), Keyboard.isRepeatEvent() );
 			EventManager.callEvent( keyboardEvent );
+		}
+	}
+	
+	public static boolean extractFile( String loc, String regex, File folder )
+	{
+		boolean found = false;
+		
+		try( JarFile jar = new JarFile( new File( loc ) ) )
+		{
+			for( Enumeration<JarEntry> entries = jar.entries(); entries.hasMoreElements(); )
+			{
+				JarEntry entry = entries.nextElement();
+				String name = entry.getName();
+				
+				if( name.matches( regex ) )
+				{
+					try
+					{
+						InputStream is = jar.getInputStream( entry );
+						FileOutputStream fos = new FileOutputStream( folder );
+						
+						while( is.available() > 0 ) fos.write( is.read() );
+						
+						fos.close();
+						is.close();
+						found = true;
+					}
+					catch( Exception e )
+					{
+					}
+				}
+			}
+		}
+		catch( Exception e )
+		{
+		}
+		
+		return found;
+	}
+	
+	protected static void extractNatives( File folder, boolean forceUpdate )
+	{
+		boolean inJar = false;
+		CodeSource cs = null;
+		
+		try
+		{
+			cs = Common.class.getProtectionDomain().getCodeSource();
+			inJar = cs.getLocation().toURI().getPath().endsWith( ".jar" );
+		}
+		catch( URISyntaxException e )
+		{
+			e.printStackTrace();
+		}
+		
+		if( inJar )
+		{
+			String loc = null;
+			
+			try
+			{
+				loc = cs.getLocation().toURI().getPath();
+			}
+			catch( URISyntaxException e )
+			{
+				e.printStackTrace();
+			}
+			
+			String[] files = { "jinput-dx8_64.dll", "jinput-dx8.dll", "jinput-raw_64.dll", "jinput-raw.dll", "libjinput-linux.so", "libjinput-linux64.so", "libjinput-osx.jnilib", "liblwjgl.jnilib", "liblwjgl.so", "liblwjgl64.so", "libopenal.so", "libopenal64.so", "lwjgl.dll", "lwjgl64.dll", "openal.dylib", "OpenAL32.dll", "OpenAL64.dll" };
+			
+			for( String f : files )
+			{
+				File tmp = new File( folder, f );
+				if( !tmp.exists() || forceUpdate ) extractFile( loc, f, folder );
+			}
+			
+			System.setProperty( "org.lwjgl.librarypath", folder.getAbsolutePath() );
+			System.setProperty( "net.java.games.input.librarypath", folder.getAbsolutePath() );
 		}
 	}
 }

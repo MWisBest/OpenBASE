@@ -19,6 +19,7 @@
  */
 package mwisbest.openbase;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 
@@ -41,6 +42,7 @@ public abstract class OpenBASE
 	private int windowWidth = 640, windowHeight = 360, framerateLimit = -1;
 	private String windowTitle = "OpenBASE", windowIcon16Loc = "GLicon16.png", windowIcon32Loc = "GLicon32.png";
 	private boolean windowVSync = false, running = false;
+	private File dataFolder = new File( ".", ".openbase" );
 	
 	public OpenBASE()
 	{
@@ -136,6 +138,7 @@ public abstract class OpenBASE
 	
 	private void init()
 	{
+		Common.extractNatives( new File( this.dataFolder, "natives" ), false );
 		try
 		{
 			System.setProperty( "org.lwjgl.opengl.Display.allowSoftwareOpenGL", "true" );
