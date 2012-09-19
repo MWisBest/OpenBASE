@@ -39,10 +39,13 @@ import org.lwjgl.opengl.GL11;
 public abstract class OpenBASE
 {
 	private Thread theThread = null;
-	private int windowWidth = 640, windowHeight = 360, framerateLimit = -1;
+	private int windowWidth = 640, windowHeight = 360, framerateLimit = -1, framesPerSecond = 0;
 	private String windowTitle = "OpenBASE", windowIcon16Loc = "GLicon16.png", windowIcon32Loc = "GLicon32.png";
 	private boolean windowVSync = false, running = false;
 	private File dataFolder = new File( ".", ".openbase" );
+	private long oldTime = 0, currentTime = 0;
+	
+	public static boolean logFPS = false;
 	
 	public OpenBASE()
 	{
@@ -174,6 +177,14 @@ public abstract class OpenBASE
 		}
 		
 		this.loadResources();
+		
+		if( OpenBASE.logFPS )
+		{
+			long startTime = System.currentTimeMillis();
+			this.oldTime = startTime;
+			this.currentTime = startTime;
+		}
+		
 		this.mainLoop();
 	}
 	
@@ -184,6 +195,17 @@ public abstract class OpenBASE
 			this.render();
 			this.audio();
 			this.input();
+			
+			if( !OpenBASE.logFPS ) continue;
+			
+			this.currentTime = System.currentTimeMillis();
+			if( this.oldTime + 1000 < this.currentTime )
+			{
+				System.out.println( this.framesPerSecond );
+				this.oldTime = this.currentTime;
+				this.framesPerSecond = 0;
+			}
+			else ++this.framesPerSecond;
 		}
 		Display.destroy();
 		try
@@ -201,6 +223,7 @@ public abstract class OpenBASE
 	{
 		Common.render( this.framerateLimit );
 		this.customRender();
+		Common.currentTextureID = GL11.glGetInteger( GL11.GL_TEXTURE_BINDING_2D );
 		Display.update();
 		if( Display.isCloseRequested() ) this.running = false;
 	}

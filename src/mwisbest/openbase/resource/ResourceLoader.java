@@ -24,12 +24,13 @@ import java.awt.Font;
 import java.io.IOException;
 import java.io.InputStream;
 
+import mwisbest.openbase.opengl.Texture;
+import mwisbest.openbase.opengl.TextureLoader;
+
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 import org.newdawn.slick.UnicodeFont;
 import org.newdawn.slick.font.effects.ColorEffect;
-import org.newdawn.slick.opengl.Texture;
-import org.newdawn.slick.opengl.TextureLoader;
 
 public class ResourceLoader
 {

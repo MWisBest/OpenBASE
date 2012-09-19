@@ -61,6 +61,20 @@ import org.newdawn.slick.openal.SoundStore;
 public class Common
 {
 	/**
+	 * The currently bound texture's ID. This is updated via the render loop after all rendering
+	 * is done (including the customRender method) and by UtilsGL.drawTexture and widget's render methods.
+	 * 
+	 * It allows skipping of unnecessary texture binds to improve performance. You should use it too
+	 * with your customRender methods!
+	 */
+	public static int currentTextureID = -1;
+	
+	private Common()
+	{
+		// Don't want multiple instances of this, so don't allow it!
+	}
+	
+	/**
 	 * Common code for rendering the Widgets to the screen. After this, customRender() is used from OpenBASE or OpenBASEApplet (whatever is calling this method).
 	 */
 	protected static void render( int framerateLimit )
@@ -128,6 +142,15 @@ public class Common
 		}
 	}
 	
+	
+	/**
+	 * Method for extracting files from a jar.
+	 * 
+	 * @param loc File's location
+	 * @param regex File's name
+	 * @param folder Folder to extract file to
+	 * @return file successfully found
+	 */
 	public static boolean extractFile( String loc, String regex, File folder )
 	{
 		boolean found = false;
@@ -165,6 +188,12 @@ public class Common
 		return found;
 	}
 	
+	/**
+	 * Used to extract the LWJGL native files from the jar if running from a jar.
+	 * 
+	 * @param folder folder to extract to
+	 * @param forceUpdate extract even if file exists
+	 */
 	protected static void extractNatives( File folder, boolean forceUpdate )
 	{
 		boolean inJar = false;

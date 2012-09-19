@@ -38,7 +38,7 @@ import org.lwjgl.opengl.GL11;
 public abstract class OpenBASEApplet extends Applet
 {
 	private static final long serialVersionUID = -3837899243800598866L;
-	private int canvasWidth = 640, canvasHeight = 360, framerateLimit = -1;
+	private int canvasWidth = 640, canvasHeight = 360, framerateLimit = -1, framesPerSecond = 0;
 	@SuppressWarnings( "unused" )
 	private String canvasTitle = "OpenBASE";
 	@SuppressWarnings( "unused" )
@@ -50,6 +50,9 @@ public abstract class OpenBASEApplet extends Applet
 	private Canvas displayParent = null;
 	private Thread theThread = null;
 	private File dataFolder = new File( ".", ".openbase" );
+	private long oldTime = 0, currentTime = 0;
+	
+	public static boolean logFPS = false;
 	
 	public OpenBASEApplet()
 	{
@@ -116,7 +119,7 @@ public abstract class OpenBASEApplet extends Applet
 		this( width, height, title, icon16Loc, icon32Loc, vSync, -1 );
 	}
 	
-	public OpenBASEApplet( int width, int height, String title, String icon16Loc, String icon32Loc, boolean vSync, int framerateLimit )
+	private OpenBASEApplet( int width, int height, String title, String icon16Loc, String icon32Loc, boolean vSync, int framerateLimit )
 	{
 		this.canvasWidth = width;
 		this.canvasHeight = height;
@@ -164,6 +167,14 @@ public abstract class OpenBASEApplet extends Applet
 					}
 					
 					OpenBASEApplet.this.loadResources();
+					
+					if( OpenBASEApplet.logFPS )
+					{
+						long startTime = System.currentTimeMillis();
+						OpenBASEApplet.this.oldTime = startTime;
+						OpenBASEApplet.this.currentTime = startTime;
+					}
+					
 					OpenBASEApplet.this.mainLoop();
 				}
 			};
@@ -245,6 +256,17 @@ public abstract class OpenBASEApplet extends Applet
 			this.render();
 			this.audio();
 			this.input();
+			
+			if( !OpenBASEApplet.logFPS ) continue;
+			
+			this.currentTime = System.currentTimeMillis();
+			if( this.oldTime + 1000 < this.currentTime )
+			{
+				System.out.println( this.framesPerSecond );
+				this.oldTime = this.currentTime;
+				this.framesPerSecond = 0;
+			}
+			else ++this.framesPerSecond;
 		}
 		Display.destroy();
 		try
@@ -262,6 +284,7 @@ public abstract class OpenBASEApplet extends Applet
 	{
 		Common.render( this.framerateLimit );
 		this.customRender();
+		Common.currentTextureID = GL11.glGetInteger( GL11.GL_TEXTURE_BINDING_2D );
 		Display.update();
 		if( Display.isCloseRequested() ) this.running = false;
 	}

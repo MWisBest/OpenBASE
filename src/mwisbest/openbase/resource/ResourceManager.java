@@ -23,11 +23,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 import mwisbest.openbase.gui.Widget;
+import mwisbest.openbase.opengl.Texture;
 
 import org.newdawn.slick.Font;
 import org.newdawn.slick.Music;
 import org.newdawn.slick.Sound;
-import org.newdawn.slick.opengl.Texture;
 
 public class ResourceManager
 {

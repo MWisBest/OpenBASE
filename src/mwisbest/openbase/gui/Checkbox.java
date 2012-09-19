@@ -1,25 +1,39 @@
+/*
+ * This file is part of OpenBASE.
+ *
+ * Copyright © 2012, Kyle Repinski
+ * OpenBASE is licensed under the GNU Lesser General Public License.
+ *
+ * OpenBASE is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * OpenBASE is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
+ * GNU Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 package mwisbest.openbase.gui;
 
+import mwisbest.openbase.Common;
 import mwisbest.openbase.event.EventHandler;
 import mwisbest.openbase.event.EventManager;
 import mwisbest.openbase.event.EventPriority;
 import mwisbest.openbase.event.gui.CheckboxClickEvent;
+import mwisbest.openbase.opengl.Texture;
 
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.ARBFramebufferObject;
-import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.EXTFramebufferObject;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GL30;
-import org.lwjgl.opengl.GLContext;
 
 public class Checkbox extends Control
 {
 	protected boolean state;
 	
-	public Checkbox( org.newdawn.slick.opengl.Texture texture )
+	public Checkbox( Texture texture )
 	{
 		this.type = WidgetType.CHECKBOX;
 		this.texture = texture;
@@ -66,21 +80,12 @@ public class Checkbox extends Control
 		GL11.glBlendFunc( GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA );
 		GL11.glDepthMask( false );
 		GL11.glColor4f( 1.0F, 1.0F, 1.0F, 1.0F );
-		GL11.glBindTexture( GL11.GL_TEXTURE_2D, this.texture.getTextureID() );
-		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST );
-		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST );
-		ContextCapabilities capabilities = GLContext.getCapabilities();
-		// Mipmap start
-		if( capabilities.OpenGL30 || capabilities.GL_EXT_framebuffer_object || capabilities.GL_ARB_framebuffer_object || capabilities.OpenGL14 )
+		if( Common.currentTextureID != this.texture.getTextureID() )
 		{
-			GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST_MIPMAP_LINEAR );
-			GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL12.GL_TEXTURE_MAX_LOD, GL11.GL_POLYGON_BIT );
-			if( capabilities.OpenGL30 ) GL30.glGenerateMipmap( GL11.GL_TEXTURE_2D );
-			else if( capabilities.GL_EXT_framebuffer_object ) EXTFramebufferObject.glGenerateMipmapEXT( GL11.GL_TEXTURE_2D );
-			else if( capabilities.GL_ARB_framebuffer_object ) ARBFramebufferObject.glGenerateMipmap( GL11.GL_TEXTURE_2D );
-			else if( capabilities.OpenGL14 ) GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL14.GL_GENERATE_MIPMAP, GL11.GL_TRUE );
+			int texID = this.texture.getTextureID();
+			GL11.glBindTexture( GL11.GL_TEXTURE_2D, texID );
+			Common.currentTextureID = texID;
 		}
-		// Mipmap end
 		GL11.glTranslatef( this.x, this.y, 0 );
 		GL11.glBegin( GL11.GL_QUADS );
 		GL11.glTexCoord2f( 0, 0 );

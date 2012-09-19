@@ -19,21 +19,17 @@
  */
 package mwisbest.openbase.gui;
 
-import org.lwjgl.opengl.ARBFramebufferObject;
-import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.EXTFramebufferObject;
-import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GL30;
-import org.lwjgl.opengl.GLContext;
+import mwisbest.openbase.Common;
+import mwisbest.openbase.opengl.Texture;
 
-public class Texture extends Widget
+import org.lwjgl.opengl.GL11;
+
+public class TextureWidget extends Widget
 {
-	protected org.newdawn.slick.opengl.Texture texture = null;
+	protected Texture texture = null;
 	protected int width = 0, height = 0;
 	
-	public Texture( org.newdawn.slick.opengl.Texture texture )
+	public TextureWidget( Texture texture )
 	{
 		this.type = WidgetType.TEXTURE;
 		this.texture = texture;
@@ -41,12 +37,12 @@ public class Texture extends Widget
 		this.height = texture.getImageHeight();
 	}
 	
-	public org.newdawn.slick.opengl.Texture getTexture()
+	public Texture getTexture()
 	{
 		return this.texture;
 	}
 	
-	public Widget setTexture( org.newdawn.slick.opengl.Texture texture )
+	public TextureWidget setTexture( Texture texture )
 	{
 		this.texture = texture;
 		return this;
@@ -57,7 +53,7 @@ public class Texture extends Widget
 		return this.width;
 	}
 	
-	public Widget setRenderWidth( int width )
+	public TextureWidget setRenderWidth( int width )
 	{
 		this.width = width;
 		return this;
@@ -68,7 +64,7 @@ public class Texture extends Widget
 		return this.height;
 	}
 	
-	public Widget setRenderHeight( int height )
+	public TextureWidget setRenderHeight( int height )
 	{
 		this.height = height;
 		return this;
@@ -82,21 +78,12 @@ public class Texture extends Widget
 		GL11.glBlendFunc( GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA );
 		GL11.glDepthMask( false );
 		GL11.glColor4f( 1.0F, 1.0F, 1.0F, 1.0F );
-		GL11.glBindTexture( GL11.GL_TEXTURE_2D, this.texture.getTextureID() );
-		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST );
-		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST );
-		ContextCapabilities capabilities = GLContext.getCapabilities();
-		// Mipmap start
-		if( capabilities.OpenGL30 || capabilities.GL_EXT_framebuffer_object || capabilities.GL_ARB_framebuffer_object || capabilities.OpenGL14 )
+		if( Common.currentTextureID != this.texture.getTextureID() )
 		{
-			GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST_MIPMAP_LINEAR );
-			GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL12.GL_TEXTURE_MAX_LOD, GL11.GL_POLYGON_BIT );
-			if( capabilities.OpenGL30 ) GL30.glGenerateMipmap( GL11.GL_TEXTURE_2D );
-			else if( capabilities.GL_EXT_framebuffer_object ) EXTFramebufferObject.glGenerateMipmapEXT( GL11.GL_TEXTURE_2D );
-			else if( capabilities.GL_ARB_framebuffer_object ) ARBFramebufferObject.glGenerateMipmap( GL11.GL_TEXTURE_2D );
-			else if( capabilities.OpenGL14 ) GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL14.GL_GENERATE_MIPMAP, GL11.GL_TRUE );
+			int texID = this.texture.getTextureID();
+			GL11.glBindTexture( GL11.GL_TEXTURE_2D, texID );
+			Common.currentTextureID = texID;
 		}
-		// Mipmap end
 		GL11.glTranslatef( this.x, this.y, 0 );
 		GL11.glBegin( GL11.GL_QUADS );
 		GL11.glTexCoord2f( 0, 0 );

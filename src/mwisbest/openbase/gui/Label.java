@@ -49,7 +49,7 @@ public class Label extends Widget
 		return this.font;
 	}
 	
-	public Widget setFont( Font font )
+	public Label setFont( Font font )
 	{
 		this.font = font;
 		this.width = font.getWidth( this.text );
@@ -62,7 +62,7 @@ public class Label extends Widget
 		return this.text;
 	}
 	
-	public Widget setText( String text )
+	public Label setText( String text )
 	{
 		this.text = text;
 		this.width = this.font.getWidth( text );
@@ -75,7 +75,7 @@ public class Label extends Widget
 		return this.color;
 	}
 	
-	public Widget setColor( Color color )
+	public Label setColor( Color color )
 	{
 		this.color = color;
 		return this;

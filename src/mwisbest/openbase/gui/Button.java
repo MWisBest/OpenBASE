@@ -19,24 +19,19 @@
  */
 package mwisbest.openbase.gui;
 
+import mwisbest.openbase.Common;
 import mwisbest.openbase.event.EventHandler;
 import mwisbest.openbase.event.EventManager;
 import mwisbest.openbase.event.EventPriority;
 import mwisbest.openbase.event.gui.ButtonClickEvent;
+import mwisbest.openbase.opengl.Texture;
 
 import org.lwjgl.input.Mouse;
-import org.lwjgl.opengl.ARBFramebufferObject;
-import org.lwjgl.opengl.ContextCapabilities;
-import org.lwjgl.opengl.EXTFramebufferObject;
 import org.lwjgl.opengl.GL11;
-import org.lwjgl.opengl.GL12;
-import org.lwjgl.opengl.GL14;
-import org.lwjgl.opengl.GL30;
-import org.lwjgl.opengl.GLContext;
 
 public class Button extends Control
 {
-	public Button( org.newdawn.slick.opengl.Texture texture )
+	public Button( Texture texture )
 	{
 		this.type = WidgetType.BUTTON;
 		this.texture = texture;
@@ -73,21 +68,12 @@ public class Button extends Control
 		GL11.glBlendFunc( GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA );
 		GL11.glDepthMask( false );
 		GL11.glColor4f( 1.0F, 1.0F, 1.0F, 1.0F );
-		GL11.glBindTexture( GL11.GL_TEXTURE_2D, this.texture.getTextureID() );
-		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST );
-		GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_NEAREST );
-		ContextCapabilities capabilities = GLContext.getCapabilities();
-		// Mipmap start
-		if( capabilities.OpenGL30 || capabilities.GL_EXT_framebuffer_object || capabilities.GL_ARB_framebuffer_object || capabilities.OpenGL14 )
+		if( Common.currentTextureID != this.texture.getTextureID() )
 		{
-			GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_NEAREST_MIPMAP_LINEAR );
-			GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL12.GL_TEXTURE_MAX_LOD, GL11.GL_POLYGON_BIT );
-			if( capabilities.OpenGL30 ) GL30.glGenerateMipmap( GL11.GL_TEXTURE_2D );
-			else if( capabilities.GL_EXT_framebuffer_object ) EXTFramebufferObject.glGenerateMipmapEXT( GL11.GL_TEXTURE_2D );
-			else if( capabilities.GL_ARB_framebuffer_object ) ARBFramebufferObject.glGenerateMipmap( GL11.GL_TEXTURE_2D );
-			else if( capabilities.OpenGL14 ) GL11.glTexParameteri( GL11.GL_TEXTURE_2D, GL14.GL_GENERATE_MIPMAP, GL11.GL_TRUE );
+			int texID = this.texture.getTextureID();
+			GL11.glBindTexture( GL11.GL_TEXTURE_2D, texID );
+			Common.currentTextureID = texID;
 		}
-		// Mipmap end
 		GL11.glTranslatef( this.x, this.y, 0 );
 		GL11.glBegin( GL11.GL_QUADS );
 		GL11.glTexCoord2f( 0, 0 );

@@ -29,7 +29,7 @@ import mwisbest.openbase.event.input.MouseEvent;
 import mwisbest.openbase.gui.Button;
 import mwisbest.openbase.gui.Checkbox;
 import mwisbest.openbase.gui.Label;
-import mwisbest.openbase.gui.Texture;
+import mwisbest.openbase.gui.TextureWidget;
 import mwisbest.openbase.input.KeyboardKey;
 import mwisbest.openbase.input.KeyboardKeyState;
 import mwisbest.openbase.input.MouseButton;
@@ -50,7 +50,8 @@ public class Applet extends OpenBASEApplet implements Listener
 	@Override
 	public void loadResources()
 	{
-		ResourceManager.addWidget( "test", new Texture( ResourceLoader.loadTexture( "GLicon256.png" ) ) );
+		OpenBASEApplet.logFPS = true;
+		ResourceManager.addWidget( "test", new TextureWidget( ResourceLoader.loadTexture( "GLicon256.png" ) ) );
 		ResourceManager.addFont( "BNE12", ResourceLoader.loadFont( "BraveNewEra.ttf", 12 ) );
 		ResourceManager.addFont( "BNE24", ResourceLoader.loadFont( "BraveNewEra.ttf", 24 ) );
 		ResourceManager.addWidget( "testLabel", new Label( ResourceManager.getFont( "BNE24" ), "Hello!" ).setX( 200 ).setY( 200 ) );
@@ -64,8 +65,7 @@ public class Applet extends OpenBASEApplet implements Listener
 					if( this.getTexture().equals( ResourceManager.getTexture( "testButtonOff" ) ) ) this.setTexture( ResourceManager.getTexture( "testButtonOn" ) );
 					else this.setTexture( ResourceManager.getTexture( "testButtonOff" ) );
 				}
-			} );
-		
+			}.setRenderHeight( 16 ).setRenderWidth( 16 ) );
 		ResourceManager.addWidget( "testCheckbox", new Checkbox( ResourceManager.getTexture( "testButtonOff" ) )
 			{
 				@Override
@@ -75,7 +75,6 @@ public class Applet extends OpenBASEApplet implements Listener
 					else this.setTexture( ResourceManager.getTexture( "testButtonOff" ) );
 				}
 			}.setPosition( 384, 128 ) );
-		
 		EventManager.registerEvents( this, this );
 	}
 	

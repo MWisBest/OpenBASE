@@ -20,18 +20,19 @@
 package mwisbest.openbase.gui;
 
 import mwisbest.openbase.event.Listener;
+import mwisbest.openbase.opengl.Texture;
 
 public abstract class Control extends Widget implements Listener
 {
-	protected org.newdawn.slick.opengl.Texture texture = null;
+	protected Texture texture = null;
 	protected int width = 0, height = 0;
 	
-	public org.newdawn.slick.opengl.Texture getTexture()
+	public Texture getTexture()
 	{
 		return this.texture;
 	}
 	
-	public Widget setTexture( org.newdawn.slick.opengl.Texture texture )
+	public Control setTexture( Texture texture )
 	{
 		this.texture = texture;
 		return this;
@@ -42,7 +43,7 @@ public abstract class Control extends Widget implements Listener
 		return this.width;
 	}
 	
-	public Widget setRenderWidth( int width )
+	public Control setRenderWidth( int width )
 	{
 		this.width = width;
 		return this;
@@ -53,7 +54,7 @@ public abstract class Control extends Widget implements Listener
 		return this.height;
 	}
 	
-	public Widget setRenderHeight( int height )
+	public Control setRenderHeight( int height )
 	{
 		this.height = height;
 		return this;
